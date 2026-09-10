@@ -24,6 +24,9 @@ export interface Scene {
   bookTheme: "vintage" | "neon";
   duration: number;
   transition: Transition;
+  // Remplace la musique de l'histoire pour cette seule scène ; absent =
+  // utilise `Story.musicTrack`.
+  musicTrack?: string;
 }
 
 export interface Story {

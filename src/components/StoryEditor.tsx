@@ -37,6 +37,7 @@ function StoryEditor({
   onPlay: () => void;
 }) {
   const [activeSceneId, setActiveSceneId] = useState(story.scenes[0]?.id);
+  const [photoDragOver, setPhotoDragOver] = useState(false);
   const dragSceneId = useRef<string | null>(null);
   const musicFileInputRef = useRef<HTMLInputElement>(null);
 
@@ -57,6 +58,14 @@ function StoryEditor({
       photoIds: has
         ? activeScene.photoIds.filter((id) => id !== photoId)
         : [...activeScene.photoIds, photoId],
+    });
+  }
+
+  function addPhotoToScene(photoId: string) {
+    if (!activeScene) return;
+    if (activeScene.photoIds.includes(photoId)) return;
+    updateScene(activeScene.id, {
+      photoIds: [...activeScene.photoIds, photoId],
     });
   }
 
@@ -125,11 +134,16 @@ function StoryEditor({
               <button
                 type="button"
                 key={p.id}
+                draggable
                 className={`story-photo-thumb${
                   activeScene?.photoIds.includes(p.id) ? " is-selected" : ""
                 }`}
                 style={{ background: p.tint }}
                 onClick={() => togglePhotoInScene(p.id)}
+                onDragStart={(e) => {
+                  e.dataTransfer.setData("text/storia-photo-id", p.id);
+                  e.dataTransfer.effectAllowed = "copy";
+                }}
                 title={p.caption}
               />
             ))}
@@ -141,7 +155,22 @@ function StoryEditor({
           <p className="story-panel-hint">Ce que verra le lecteur, en plein écran</p>
           {activeScene && (
             <div
-              className={`story-preview story-preview-${activeScene.bookTheme}`}
+              className={`story-preview story-preview-${activeScene.bookTheme}${
+                photoDragOver ? " is-drag-over" : ""
+              }`}
+              onDragOver={(e) => {
+                if (e.dataTransfer.types.includes("text/storia-photo-id")) {
+                  e.preventDefault();
+                  setPhotoDragOver(true);
+                }
+              }}
+              onDragLeave={() => setPhotoDragOver(false)}
+              onDrop={(e) => {
+                e.preventDefault();
+                setPhotoDragOver(false);
+                const photoId = e.dataTransfer.getData("text/storia-photo-id");
+                if (photoId) addPhotoToScene(photoId);
+              }}
             >
               <span className="story-preview-badge">APERÇU 16:9</span>
               {previewPhoto && (
@@ -270,6 +299,39 @@ function StoryEditor({
             <p className="story-panel-note">
               Appliquée à toute l'histoire. Une scène peut la remplacer.
             </p>
+
+            {activeScene && (
+              <>
+                <span className="story-panel-label story-music-override-label">
+                  Pour cette scène
+                </span>
+                <div className="story-chip-row">
+                  <button
+                    type="button"
+                    className={`story-chip${
+                      !activeScene.musicTrack ? " is-active" : ""
+                    }`}
+                    onClick={() =>
+                      updateScene(activeScene.id, { musicTrack: undefined })
+                    }
+                  >
+                    Par défaut
+                  </button>
+                  {MUSIC_LIBRARY.map((track) => (
+                    <button
+                      type="button"
+                      key={track}
+                      className={`story-chip${
+                        activeScene.musicTrack === track ? " is-active" : ""
+                      }`}
+                      onClick={() => updateScene(activeScene.id, { musicTrack: track })}
+                    >
+                      {track}
+                    </button>
+                  ))}
+                </div>
+              </>
+            )}
           </div>
 
           <div>

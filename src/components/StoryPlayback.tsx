@@ -131,7 +131,8 @@ function StoryPlayback({
           {paused ? "▶" : "❙❙"}
         </button>
         <span className="story-playback-music">
-          ♪ {story.musicTrack.toUpperCase()} · {transitionLabel?.toUpperCase()}
+          ♪ {(scene.musicTrack ?? story.musicTrack).toUpperCase()} ·{" "}
+          {transitionLabel?.toUpperCase()}
         </span>
         <button type="button" className="story-playback-quit" onClick={onQuit}>
           Quitter ✕
