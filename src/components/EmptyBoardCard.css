@@ -53,6 +53,51 @@
   );
   box-shadow: 0 0 0 1px color-mix(in srgb, var(--amb-neutre-accent) 13%, transparent) inset;
 }
+.ambiance-corail.empty-board-card {
+  background: radial-gradient(
+    120% 95% at 30% 14%,
+    var(--amb-corail-empty-from) 0%,
+    var(--amb-corail-empty-mid) 60%,
+    var(--amb-corail-empty-to) 100%
+  );
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--amb-corail-accent) 16%, transparent) inset;
+}
+.ambiance-lavande.empty-board-card {
+  background: radial-gradient(
+    120% 95% at 30% 14%,
+    var(--amb-lavande-empty-from) 0%,
+    var(--amb-lavande-empty-mid) 60%,
+    var(--amb-lavande-empty-to) 100%
+  );
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--amb-lavande-accent) 16%, transparent) inset;
+}
+.ambiance-petrole.empty-board-card {
+  background: radial-gradient(
+    120% 95% at 30% 14%,
+    var(--amb-petrole-empty-from) 0%,
+    var(--amb-petrole-empty-mid) 60%,
+    var(--amb-petrole-empty-to) 100%
+  );
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--amb-petrole-accent) 16%, transparent) inset;
+}
+.ambiance-sauge.empty-board-card {
+  background: radial-gradient(
+    120% 95% at 30% 14%,
+    var(--amb-sauge-empty-from) 0%,
+    var(--amb-sauge-empty-mid) 60%,
+    var(--amb-sauge-empty-to) 100%
+  );
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--amb-sauge-accent) 15%, transparent) inset;
+}
+.ambiance-bordeaux.empty-board-card {
+  background: radial-gradient(
+    120% 95% at 30% 14%,
+    var(--amb-bordeaux-empty-from) 0%,
+    var(--amb-bordeaux-empty-mid) 60%,
+    var(--amb-bordeaux-empty-to) 100%
+  );
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--amb-bordeaux-accent) 16%, transparent) inset;
+}
 
 .empty-board-scene {
   position: relative;
@@ -88,6 +133,21 @@
 }
 .ambiance-neutre .empty-board-halo {
   background: radial-gradient(48% 42% at 60% 32%, color-mix(in srgb, var(--amb-neutre-accent) 13%, transparent), transparent 72%);
+}
+.ambiance-corail .empty-board-halo {
+  background: radial-gradient(48% 42% at 60% 32%, color-mix(in srgb, var(--amb-corail-accent) 17%, transparent), transparent 72%);
+}
+.ambiance-lavande .empty-board-halo {
+  background: radial-gradient(48% 42% at 60% 32%, color-mix(in srgb, var(--amb-lavande-accent) 17%, transparent), transparent 72%);
+}
+.ambiance-petrole .empty-board-halo {
+  background: radial-gradient(48% 42% at 60% 32%, color-mix(in srgb, var(--amb-petrole-accent) 16%, transparent), transparent 72%);
+}
+.ambiance-sauge .empty-board-halo {
+  background: radial-gradient(48% 42% at 60% 32%, color-mix(in srgb, var(--amb-sauge-accent) 15%, transparent), transparent 72%);
+}
+.ambiance-bordeaux .empty-board-halo {
+  background: radial-gradient(48% 42% at 60% 32%, color-mix(in srgb, var(--amb-bordeaux-accent) 16%, transparent), transparent 72%);
 }
 
 /* Cadres fantômes : déjà épinglés, déjà inclinés, en pointillé. */
@@ -186,6 +246,21 @@
 .ambiance-neutre .ghost-pin {
   --amb-accent: var(--amb-neutre-accent);
 }
+.ambiance-corail .ghost-pin {
+  --amb-accent: var(--amb-corail-accent);
+}
+.ambiance-lavande .ghost-pin {
+  --amb-accent: var(--amb-lavande-accent);
+}
+.ambiance-petrole .ghost-pin {
+  --amb-accent: var(--amb-petrole-accent);
+}
+.ambiance-sauge .ghost-pin {
+  --amb-accent: var(--amb-sauge-accent);
+}
+.ambiance-bordeaux .ghost-pin {
+  --amb-accent: var(--amb-bordeaux-accent);
+}
 
 .empty-board-note {
   margin: 0;
@@ -208,6 +283,21 @@
 }
 .ambiance-neutre .empty-board-note {
   color: color-mix(in srgb, var(--amb-neutre-note) 55%, transparent);
+}
+.ambiance-corail .empty-board-note {
+  color: color-mix(in srgb, var(--amb-corail-note) 62%, transparent);
+}
+.ambiance-lavande .empty-board-note {
+  color: color-mix(in srgb, var(--amb-lavande-note) 62%, transparent);
+}
+.ambiance-petrole .empty-board-note {
+  color: color-mix(in srgb, var(--amb-petrole-note) 60%, transparent);
+}
+.ambiance-sauge .empty-board-note {
+  color: color-mix(in srgb, var(--amb-sauge-note) 60%, transparent);
+}
+.ambiance-bordeaux .empty-board-note {
+  color: color-mix(in srgb, var(--amb-bordeaux-note) 60%, transparent);
 }
 
 .empty-board-footer {
@@ -260,4 +350,24 @@
 .ambiance-neutre .empty-board-cta {
   background: var(--amb-neutre-accent);
   color: var(--amb-neutre-ink);
+}
+.ambiance-corail .empty-board-cta {
+  background: var(--amb-corail-accent);
+  color: var(--amb-corail-ink);
+}
+.ambiance-lavande .empty-board-cta {
+  background: var(--amb-lavande-accent);
+  color: var(--amb-lavande-ink);
+}
+.ambiance-petrole .empty-board-cta {
+  background: var(--amb-petrole-accent);
+  color: var(--amb-petrole-ink);
+}
+.ambiance-sauge .empty-board-cta {
+  background: var(--amb-sauge-accent);
+  color: var(--amb-sauge-ink);
+}
+.ambiance-bordeaux .empty-board-cta {
+  background: var(--amb-bordeaux-accent);
+  color: var(--amb-bordeaux-ink);
 }

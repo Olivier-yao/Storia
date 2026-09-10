@@ -9,10 +9,12 @@ import PhotoFrame, { type PhotoDepth, type BoardPhoto } from "./PhotoFrame";
 import NoteSlideOut from "./NoteSlideOut";
 import BookOverlay from "./BookOverlay";
 import FloatingNote, { type FloatingNoteData } from "./FloatingNote";
+import AmbientText from "./AmbientText";
 import type { Ambiance } from "./CategoryCard";
 import StoryEditor from "./StoryEditor";
 import StoryPlayback from "./StoryPlayback";
 import { emptyStory, type Story } from "../data/storyTypes";
+import type { AmbientTextData } from "../data/boardData";
 import "./FloatingBoard.css";
 
 const MIN_ZOOM = 0.4;
@@ -30,6 +32,11 @@ const DEFAULT_BOOK_THEME: Record<Ambiance, "vintage" | "neon"> = {
   amis: "neon",
   rencontres: "vintage",
   neutre: "vintage",
+  corail: "vintage",
+  lavande: "vintage",
+  petrole: "neon",
+  sauge: "vintage",
+  bordeaux: "vintage",
 };
 
 // Les photos sont posées sur le même plan que le tableau : la caméra pan/zoom
@@ -51,7 +58,7 @@ interface FloatingBoardProps {
   photos: BoardPhoto[];
   notes?: FloatingNoteData[];
   story?: Story | null;
-  ambientWords: string[];
+  ambientTexts: AmbientTextData[];
   onBack: () => void;
   // Ouvre directement sur l'éditeur d'histoire (bouton "Reprendre" de l'accueil).
   startInEditor?: boolean;
@@ -60,6 +67,7 @@ interface FloatingBoardProps {
   onPhotosChange?: (photos: BoardPhoto[]) => void;
   onNotesChange?: (notes: FloatingNoteData[]) => void;
   onStoryChange?: (story: Story | null) => void;
+  onAmbientTextsChange?: (texts: AmbientTextData[]) => void;
 }
 
 function FloatingBoard({
@@ -68,19 +76,25 @@ function FloatingBoard({
   photos: initialPhotos,
   notes = [],
   story: initialStory = null,
-  ambientWords,
+  ambientTexts,
   onBack,
   startInEditor = false,
   onPhotosChange,
   onNotesChange,
   onStoryChange,
+  onAmbientTextsChange,
 }: FloatingBoardProps) {
   const viewportRef = useRef<HTMLDivElement>(null);
   const canvasClipRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [photos, setPhotos] = useState<BoardPhoto[]>(initialPhotos);
   const [localNotes, setLocalNotes] = useState<FloatingNoteData[]>(notes);
+  const [localAmbientTexts, setLocalAmbientTexts] =
+    useState<AmbientTextData[]>(ambientTexts);
   const [editingNoteId, setEditingNoteId] = useState<string | null>(null);
+  const [editingAmbientId, setEditingAmbientId] = useState<string | null>(
+    null,
+  );
   const [pan, setPan] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [hoveredId, setHoveredId] = useState<string | null>(null);
@@ -106,6 +120,10 @@ function FloatingBoard({
     onStoryChange?.(story);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [story]);
+  useEffect(() => {
+    onAmbientTextsChange?.(localAmbientTexts);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [localAmbientTexts]);
 
   const photoPress = useRef<{
     id: string;
@@ -199,6 +217,69 @@ function FloatingBoard({
       window.removeEventListener("mouseup", onUp);
     };
   }, []);
+
+  // Glisser un texte flottant pour le repositionner — même mécanique que
+  // les notes libres.
+  const ambientPress = useRef<{
+    id: string;
+    startClientX: number;
+    startClientY: number;
+    startX: number;
+    startY: number;
+  } | null>(null);
+
+  useEffect(() => {
+    function onMove(e: globalThis.MouseEvent) {
+      const press = ambientPress.current;
+      if (!press) return;
+      const z = zoomRef.current;
+      const newX = press.startX + (e.clientX - press.startClientX) / z;
+      const newY = press.startY + (e.clientY - press.startClientY) / z;
+      setLocalAmbientTexts((prev) =>
+        prev.map((a) => (a.id === press.id ? { ...a, x: newX, y: newY } : a)),
+      );
+    }
+    function onUp() {
+      ambientPress.current = null;
+    }
+    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mouseup", onUp);
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("mouseup", onUp);
+    };
+  }, []);
+
+  function handleAmbientPressStart(id: string, clientX: number, clientY: number) {
+    const text = localAmbientTexts.find((a) => a.id === id);
+    if (!text) return;
+    ambientPress.current = {
+      id,
+      startClientX: clientX,
+      startClientY: clientY,
+      startX: text.x,
+      startY: text.y,
+    };
+  }
+
+  function handleAmbientTextSave(id: string, text: string) {
+    setLocalAmbientTexts((prev) =>
+      prev.map((a) => (a.id === id ? { ...a, text } : a)),
+    );
+    setEditingAmbientId(null);
+  }
+
+  function handleAddAmbientText() {
+    const id = `ambient-${Date.now()}`;
+    const newText: AmbientTextData = {
+      id,
+      text: "un murmure à écrire",
+      x: 480 + Math.random() * 300 - 150,
+      y: 320 + Math.random() * 260 - 130,
+    };
+    setLocalAmbientTexts((prev) => [...prev, newText]);
+    setEditingAmbientId(id);
+  }
 
   function handleNotePressStart(id: string, clientX: number, clientY: number) {
     const note = localNotes.find((n) => n.id === id);
@@ -410,6 +491,13 @@ function FloatingBoard({
           <button
             type="button"
             className="board-action-active"
+            onClick={handleAddAmbientText}
+          >
+            + Texte flottant
+          </button>
+          <button
+            type="button"
+            className="board-action-active"
             onClick={handleOpenStoryEditor}
           >
             Créer une histoire
@@ -429,11 +517,6 @@ function FloatingBoard({
         onMouseLeave={stopDrag}
       >
         <div className="board-ambient-glow" />
-        {ambientWords.map((word, i) => (
-          <span key={word} className={`board-ambient-word word-${i}`}>
-            {word}
-          </span>
-        ))}
         {DEPTH_ORDER.map((depth) => {
           const factor = PARALLAX_FACTOR[depth];
           return (
@@ -467,6 +550,16 @@ function FloatingBoard({
                     onTextSave={handleNoteTextSave}
                     onToggleRoaming={handleToggleRoaming}
                     onPressStart={handleNotePressStart}
+                  />
+                ))}
+              {depth === "far" &&
+                localAmbientTexts.map((text) => (
+                  <AmbientText
+                    key={text.id}
+                    data={text}
+                    editingInitially={text.id === editingAmbientId}
+                    onTextSave={handleAmbientTextSave}
+                    onPressStart={handleAmbientPressStart}
                   />
                 ))}
             </div>

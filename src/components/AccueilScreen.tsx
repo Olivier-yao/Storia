@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import CategoryCard, {
   type Ambiance,
   type CategoryCardData,
 } from "./CategoryCard";
 import "./AccueilScreen.css";
+
+const MIN_ZOOM = 0.7;
+const MAX_ZOOM = 1.6;
 
 const THEME_CHOICES: { id: Ambiance; label: string }[] = [
   { id: "neutre", label: "Sans thème" },
@@ -11,6 +14,11 @@ const THEME_CHOICES: { id: Ambiance; label: string }[] = [
   { id: "amoureux", label: "Amoureux" },
   { id: "amis", label: "Amis" },
   { id: "rencontres", label: "Belles rencontres" },
+  { id: "corail", label: "Corail" },
+  { id: "lavande", label: "Lavande" },
+  { id: "petrole", label: "Bleu pétrole" },
+  { id: "sauge", label: "Sauge" },
+  { id: "bordeaux", label: "Bordeaux" },
 ];
 
 function AccueilScreen({
@@ -29,6 +37,22 @@ function AccueilScreen({
   const [creating, setCreating] = useState(false);
   const [name, setName] = useState("");
   const [theme, setTheme] = useState<Ambiance>("neutre");
+  const [zoom, setZoom] = useState(1);
+  const mosaicRef = useRef<HTMLDivElement>(null);
+
+  // Molette pour zoomer/dézoomer sur la mosaïque, comme sur un tableau
+  // flottant — même mécanique et mêmes bornes que la vue photo.
+  useEffect(() => {
+    const node = mosaicRef.current;
+    if (!node) return;
+    const onWheel = (e: globalThis.WheelEvent) => {
+      e.preventDefault();
+      const delta = -e.deltaY * 0.0015;
+      setZoom((z) => Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, z + z * delta)));
+    };
+    node.addEventListener("wheel", onWheel, { passive: false });
+    return () => node.removeEventListener("wheel", onWheel);
+  }, []);
 
   function reset() {
     setCreating(false);
@@ -145,25 +169,42 @@ function AccueilScreen({
         </div>
       </div>
 
-      <div className="accueil-mosaic">
-        {featured && (
-          <div className="accueil-featured">
-            <CategoryCard
-              data={featured}
-              onOpen={() => onOpenCategory(featured.boardId)}
-              featured
-            />
+      <div className="accueil-mosaic" ref={mosaicRef}>
+        <div
+          className="accueil-mosaic-zoom"
+          style={{ transform: `scale(${zoom})` }}
+        >
+          {featured && (
+            <div className="accueil-featured">
+              <div className="accueil-featured-glow" />
+              <CategoryCard
+                data={featured}
+                onOpen={() => onOpenCategory(featured.boardId)}
+                featured
+              />
+            </div>
+          )}
+          <div className="accueil-others">
+            {others.map((card, i) => (
+              <div
+                key={card.boardId}
+                className={`accueil-other-slot tilt-${i % 4}`}
+              >
+                <CategoryCard
+                  data={card}
+                  onOpen={() => onOpenCategory(card.boardId)}
+                />
+              </div>
+            ))}
           </div>
-        )}
-        <div className="accueil-others">
-          {others.map((card) => (
-            <CategoryCard
-              key={card.boardId}
-              data={card}
-              onOpen={() => onOpenCategory(card.boardId)}
-            />
-          ))}
         </div>
+      </div>
+
+      <div className="accueil-zoom-controls">
+        <span>ZOOM {Math.round(zoom * 100)}%</span>
+        <button type="button" onClick={() => setZoom(1)}>
+          RECENTRER
+        </button>
       </div>
     </div>
   );

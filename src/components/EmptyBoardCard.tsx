@@ -7,6 +7,11 @@ const FUTURE_NOTE: Record<Ambiance, string> = {
   amis: "la première soirée",
   rencontres: "quelqu'un, un jour",
   neutre: "nom encore à trouver",
+  corail: "un premier éclat",
+  lavande: "encore à écrire",
+  petrole: "le large, bientôt",
+  sauge: "ça pousse tout doucement",
+  bordeaux: "une histoire à ouvrir",
 };
 
 const NOTE_FONT: Record<Ambiance, string> = {
@@ -15,6 +20,11 @@ const NOTE_FONT: Record<Ambiance, string> = {
   amis: "var(--font-hand-decontractee)",
   rencontres: "var(--font-hand-elegante)",
   neutre: "var(--font-hand-elegante)",
+  corail: "var(--font-hand-decontractee)",
+  lavande: "var(--font-hand-elegante)",
+  petrole: "var(--font-hand-decontractee)",
+  sauge: "var(--font-hand-enfantine)",
+  bordeaux: "var(--font-hand-elegante)",
 };
 
 function GhostFrames({ ambiance }: { ambiance: Ambiance }) {

@@ -11,7 +11,7 @@ import { loadState, saveState } from "./data/persistence";
 const SAVE_DEBOUNCE_MS = 400;
 
 function emptyBoard(name: string): BoardData {
-  return { name, photos: [], notes: [], ambientWords: [] };
+  return { name, photos: [], notes: [], ambientTexts: [] };
 }
 
 function App() {
@@ -128,7 +128,10 @@ function App() {
             updateBoard(openBoardId, (b) => ({ ...b, notes }))
           }
           onStoryChange={(story) => updateStory(openBoardId, story)}
-          ambientWords={board.ambientWords}
+          ambientTexts={board.ambientTexts}
+          onAmbientTextsChange={(ambientTexts) =>
+            updateBoard(openBoardId, (b) => ({ ...b, ambientTexts }))
+          }
           startInEditor={openInEditor}
           onBack={() => {
             setOpenBoardId(null);

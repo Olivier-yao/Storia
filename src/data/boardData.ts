@@ -2,11 +2,22 @@ import type { BoardPhoto } from "../components/PhotoFrame";
 import type { FloatingNoteData } from "../components/FloatingNote";
 import type { Ambiance } from "../components/CategoryCard";
 
+// Texte décoratif flottant du fond : pas de simple mot statique, une
+// phrase entière qui s'assemble mot à mot en boucle (immersion), posée
+// dans le même espace que les photos/notes — elle suit donc la caméra
+// (pan/zoom) exactement comme elles, jamais figée à l'écran.
+export interface AmbientTextData {
+  id: string;
+  text: string;
+  x: number;
+  y: number;
+}
+
 export interface BoardData {
   name: string;
   photos: BoardPhoto[];
   notes: FloatingNoteData[];
-  ambientWords: string[];
+  ambientTexts: AmbientTextData[];
 }
 
 const famillePhotos: BoardPhoto[] = [
@@ -465,24 +476,36 @@ export const boards: Partial<Record<Ambiance, BoardData>> = {
     name: "Famille",
     photos: famillePhotos,
     notes: familleNotes,
-    ambientWords: ["l'odeur du sable chaud", "tu riais trop fort"],
+    ambientTexts: [
+      { id: "famille-amb-1", text: "l'odeur du sable chaud", x: 130, y: 160 },
+      { id: "famille-amb-2", text: "tu riais trop fort", x: 900, y: 480 },
+    ],
   },
   amoureux: {
     name: "Amoureux",
     photos: amoureuxPhotos,
     notes: amoureuxNotes,
-    ambientWords: ["on ne s'est pas lâchés", "le premier je t'aime"],
+    ambientTexts: [
+      { id: "amoureux-amb-1", text: "on ne s'est pas lâchés", x: 120, y: 150 },
+      { id: "amoureux-amb-2", text: "le premier je t'aime", x: 880, y: 470 },
+    ],
   },
   amis: {
     name: "Amis",
     photos: amisPhotos,
     notes: amisNotes,
-    ambientWords: ["on a raté le dernier bus", "personne ne voulait rentrer"],
+    ambientTexts: [
+      { id: "amis-amb-1", text: "on a raté le dernier bus", x: 110, y: 150 },
+      { id: "amis-amb-2", text: "personne ne voulait rentrer", x: 860, y: 480 },
+    ],
   },
   rencontres: {
     name: "Belles rencontres",
     photos: rencontresPhotos,
     notes: rencontresNotes,
-    ambientWords: ["un sourire dans le hall", "on ne s'est jamais revus"],
+    ambientTexts: [
+      { id: "rencontres-amb-1", text: "un sourire dans le hall", x: 130, y: 150 },
+      { id: "rencontres-amb-2", text: "on ne s'est jamais revus", x: 870, y: 480 },
+    ],
   },
 };

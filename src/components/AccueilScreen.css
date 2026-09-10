@@ -1,4 +1,5 @@
 .accueil-screen {
+  position: relative;
   height: 100vh;
   box-sizing: border-box;
   padding: 32px 56px 32px;
@@ -167,18 +168,90 @@
   --amb-accent: var(--amb-neutre-accent);
   --amb-ink: var(--amb-neutre-ink, #241a12);
 }
+.accueil-resume.ambiance-corail {
+  --amb-accent: var(--amb-corail-accent);
+  --amb-ink: var(--amb-corail-ink, #241a12);
+}
+.accueil-resume.ambiance-lavande {
+  --amb-accent: var(--amb-lavande-accent);
+  --amb-ink: var(--amb-lavande-ink, #241a12);
+}
+.accueil-resume.ambiance-petrole {
+  --amb-accent: var(--amb-petrole-accent);
+  --amb-ink: var(--amb-petrole-ink, #241a12);
+}
+.accueil-resume.ambiance-sauge {
+  --amb-accent: var(--amb-sauge-accent);
+  --amb-ink: var(--amb-sauge-ink, #241a12);
+}
+.accueil-resume.ambiance-bordeaux {
+  --amb-accent: var(--amb-bordeaux-accent);
+  --amb-ink: var(--amb-bordeaux-ink, #241a12);
+}
 
 .accueil-mosaic {
   flex: 1;
   min-height: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.accueil-mosaic-zoom {
+  height: 100%;
   display: flex;
   gap: 24px;
   align-items: stretch;
+  transform-origin: 50% 50%;
+  transition: transform 120ms var(--ease-drift, ease-out);
 }
 
 .accueil-featured {
+  position: relative;
   flex: 0 0 40%;
   min-height: 0;
+}
+
+.accueil-featured-glow {
+  position: absolute;
+  inset: -14%;
+  z-index: -1;
+  background: radial-gradient(
+    55% 55% at 38% 30%,
+    color-mix(in srgb, var(--amb-accent, var(--amb-famille-accent)) 20%, transparent),
+    transparent 70%
+  );
+  filter: blur(6px);
+  pointer-events: none;
+}
+.accueil-featured:has(.ambiance-famille) .accueil-featured-glow {
+  --amb-accent: var(--amb-famille-accent);
+}
+.accueil-featured:has(.ambiance-amoureux) .accueil-featured-glow {
+  --amb-accent: var(--amb-amoureux-accent);
+}
+.accueil-featured:has(.ambiance-amis) .accueil-featured-glow {
+  --amb-accent: var(--amb-amis-accent);
+}
+.accueil-featured:has(.ambiance-rencontres) .accueil-featured-glow {
+  --amb-accent: var(--amb-rencontres-accent);
+}
+.accueil-featured:has(.ambiance-neutre) .accueil-featured-glow {
+  --amb-accent: var(--amb-neutre-accent);
+}
+.accueil-featured:has(.ambiance-corail) .accueil-featured-glow {
+  --amb-accent: var(--amb-corail-accent);
+}
+.accueil-featured:has(.ambiance-lavande) .accueil-featured-glow {
+  --amb-accent: var(--amb-lavande-accent);
+}
+.accueil-featured:has(.ambiance-petrole) .accueil-featured-glow {
+  --amb-accent: var(--amb-petrole-accent);
+}
+.accueil-featured:has(.ambiance-sauge) .accueil-featured-glow {
+  --amb-accent: var(--amb-sauge-accent);
+}
+.accueil-featured:has(.ambiance-bordeaux) .accueil-featured-glow {
+  --amb-accent: var(--amb-bordeaux-accent);
 }
 
 .accueil-others {
@@ -189,6 +262,59 @@
   gap: 20px;
   min-width: 0;
   min-height: 0;
+}
+
+/* Cartes légèrement éparpillées façon pile de cartes, jamais alignées au
+   carré — clin d'œil à la référence "cartes empilées" fournie. */
+.accueil-other-slot {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  transition:
+    transform 220ms var(--ease-drift, ease-out),
+    filter 220ms var(--ease-drift, ease-out);
+}
+.accueil-other-slot.tilt-0 {
+  transform: rotate(-0.6deg);
+}
+.accueil-other-slot.tilt-1 {
+  transform: rotate(0.7deg);
+}
+.accueil-other-slot.tilt-2 {
+  transform: rotate(0.5deg);
+}
+.accueil-other-slot.tilt-3 {
+  transform: rotate(-0.5deg);
+}
+.accueil-other-slot:hover {
+  transform: rotate(0deg) scale(1.015);
+  filter: brightness(1.06);
+  z-index: 1;
+}
+
+.accueil-zoom-controls {
+  position: absolute;
+  right: 56px;
+  bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: #8e7e70;
+}
+.accueil-zoom-controls button {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: #f6efe4;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  padding: 6px 14px;
+  cursor: pointer;
 }
 
 .accueil-create-form {
@@ -283,4 +409,19 @@
 }
 .accueil-theme-chip.ambiance-neutre {
   --amb-accent: var(--amb-neutre-accent);
+}
+.accueil-theme-chip.ambiance-corail {
+  --amb-accent: var(--amb-corail-accent);
+}
+.accueil-theme-chip.ambiance-lavande {
+  --amb-accent: var(--amb-lavande-accent);
+}
+.accueil-theme-chip.ambiance-petrole {
+  --amb-accent: var(--amb-petrole-accent);
+}
+.accueil-theme-chip.ambiance-sauge {
+  --amb-accent: var(--amb-sauge-accent);
+}
+.accueil-theme-chip.ambiance-bordeaux {
+  --amb-accent: var(--amb-bordeaux-accent);
 }

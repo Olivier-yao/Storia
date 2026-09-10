@@ -30,6 +30,21 @@
 .ambiance-neutre .category-card-featured-badge {
   color: var(--amb-neutre-accent);
 }
+.ambiance-corail .category-card-featured-badge {
+  color: var(--amb-corail-accent);
+}
+.ambiance-lavande .category-card-featured-badge {
+  color: var(--amb-lavande-accent);
+}
+.ambiance-petrole .category-card-featured-badge {
+  color: var(--amb-petrole-accent);
+}
+.ambiance-sauge .category-card-featured-badge {
+  color: var(--amb-sauge-accent);
+}
+.ambiance-bordeaux .category-card-featured-badge {
+  color: var(--amb-bordeaux-accent);
+}
 
 .ambiance-famille.category-card {
   background: radial-gradient(
@@ -75,6 +90,51 @@
     var(--amb-neutre-card-to)
   );
   border: 0.8px solid color-mix(in srgb, var(--amb-neutre-accent) 22%, transparent);
+}
+.ambiance-corail.category-card {
+  background: radial-gradient(
+    130% 100% at 30% 15%,
+    var(--amb-corail-card-from),
+    var(--amb-corail-ground) 65%,
+    var(--amb-corail-card-to)
+  );
+  border: 0.8px solid color-mix(in srgb, var(--amb-corail-accent) 22%, transparent);
+}
+.ambiance-lavande.category-card {
+  background: radial-gradient(
+    130% 100% at 30% 15%,
+    var(--amb-lavande-card-from),
+    var(--amb-lavande-ground) 65%,
+    var(--amb-lavande-card-to)
+  );
+  border: 0.8px solid color-mix(in srgb, var(--amb-lavande-accent) 22%, transparent);
+}
+.ambiance-petrole.category-card {
+  background: radial-gradient(
+    130% 100% at 30% 15%,
+    var(--amb-petrole-card-from),
+    var(--amb-petrole-ground) 65%,
+    var(--amb-petrole-card-to)
+  );
+  border: 0.8px solid color-mix(in srgb, var(--amb-petrole-accent) 22%, transparent);
+}
+.ambiance-sauge.category-card {
+  background: radial-gradient(
+    130% 100% at 30% 15%,
+    var(--amb-sauge-card-from),
+    var(--amb-sauge-ground) 65%,
+    var(--amb-sauge-card-to)
+  );
+  border: 0.8px solid color-mix(in srgb, var(--amb-sauge-accent) 22%, transparent);
+}
+.ambiance-bordeaux.category-card {
+  background: radial-gradient(
+    130% 100% at 30% 15%,
+    var(--amb-bordeaux-card-from),
+    var(--amb-bordeaux-ground) 65%,
+    var(--amb-bordeaux-card-to)
+  );
+  border: 0.8px solid color-mix(in srgb, var(--amb-bordeaux-accent) 22%, transparent);
 }
 
 .category-card-scene {
@@ -173,4 +233,19 @@
 }
 .ambiance-neutre .category-card-open {
   color: var(--amb-neutre-accent);
+}
+.ambiance-corail .category-card-open {
+  color: var(--amb-corail-accent);
+}
+.ambiance-lavande .category-card-open {
+  color: var(--amb-lavande-accent);
+}
+.ambiance-petrole .category-card-open {
+  color: var(--amb-petrole-accent);
+}
+.ambiance-sauge .category-card-open {
+  color: var(--amb-sauge-accent);
+}
+.ambiance-bordeaux .category-card-open {
+  color: var(--amb-bordeaux-accent);
 }

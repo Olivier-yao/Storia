@@ -27,6 +27,26 @@
   --amb-accent: var(--amb-neutre-accent);
   --amb-ground: var(--amb-neutre-ground);
 }
+.ambiance-corail {
+  --amb-accent: var(--amb-corail-accent);
+  --amb-ground: var(--amb-corail-ground);
+}
+.ambiance-lavande {
+  --amb-accent: var(--amb-lavande-accent);
+  --amb-ground: var(--amb-lavande-ground);
+}
+.ambiance-petrole {
+  --amb-accent: var(--amb-petrole-accent);
+  --amb-ground: var(--amb-petrole-ground);
+}
+.ambiance-sauge {
+  --amb-accent: var(--amb-sauge-accent);
+  --amb-ground: var(--amb-sauge-ground);
+}
+.ambiance-bordeaux {
+  --amb-accent: var(--amb-bordeaux-accent);
+  --amb-ground: var(--amb-bordeaux-ground);
+}
 
 .board-viewport {
   background: var(--amb-ground);
@@ -129,26 +149,6 @@
     transparent 60%
   );
   pointer-events: none;
-}
-
-.board-ambient-word {
-  position: absolute;
-  font-family: var(--font-hand-decontractee);
-  font-size: 22px;
-  color: #f2ece0;
-  opacity: 0.35;
-  filter: blur(0.8px);
-  pointer-events: none;
-}
-
-.word-0 {
-  top: 32%;
-  right: 8%;
-}
-
-.word-1 {
-  bottom: 22%;
-  left: 6%;
 }
 
 .board-canvas {

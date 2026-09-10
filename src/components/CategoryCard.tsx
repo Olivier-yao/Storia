@@ -2,7 +2,17 @@ import type { CSSProperties } from "react";
 import EmptyBoardCard from "./EmptyBoardCard";
 import "./CategoryCard.css";
 
-export type Ambiance = "famille" | "amoureux" | "amis" | "rencontres" | "neutre";
+export type Ambiance =
+  | "famille"
+  | "amoureux"
+  | "amis"
+  | "rencontres"
+  | "neutre"
+  | "corail"
+  | "lavande"
+  | "petrole"
+  | "sauge"
+  | "bordeaux";
 
 export interface CardPhoto {
   top: number;

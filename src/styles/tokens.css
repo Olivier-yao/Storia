@@ -56,6 +56,65 @@
   --amb-neutre-empty-mid: #2b2722;
   --amb-neutre-empty-to: #211e1b;
 
+  /* Thèmes libres — palettes supplémentaires pour un tableau perso, sans
+     rattachement à une ambiance relationnelle précise (règle 12/09 :
+     "pas seulement ceux déjà dans l'application"). */
+
+  /* Corail */
+  --amb-corail-accent: #e8734a;
+  --amb-corail-ground: #2e1f19;
+  --amb-corail-card-from: #4a2e22;
+  --amb-corail-card-to: #201512;
+  --amb-corail-ink: #2a140a;
+  --amb-corail-note: #f5dcc9;
+  --amb-corail-empty-from: #402a20;
+  --amb-corail-empty-mid: #2b1e18;
+  --amb-corail-empty-to: #201712;
+
+  /* Lavande */
+  --amb-lavande-accent: #a78bd0;
+  --amb-lavande-ground: #241f2e;
+  --amb-lavande-card-from: #362e4a;
+  --amb-lavande-card-to: #191620;
+  --amb-lavande-ink: #1e1729;
+  --amb-lavande-note: #e6dcf5;
+  --amb-lavande-empty-from: #342c42;
+  --amb-lavande-empty-mid: #26212f;
+  --amb-lavande-empty-to: #1c1922;
+
+  /* Bleu pétrole */
+  --amb-petrole-accent: #5b9ac7;
+  --amb-petrole-ground: #16232e;
+  --amb-petrole-card-from: #203648;
+  --amb-petrole-card-to: #131e27;
+  --amb-petrole-ink: #12212e;
+  --amb-petrole-note: #d6e6f0;
+  --amb-petrole-empty-from: #223a4a;
+  --amb-petrole-empty-mid: #1a2c38;
+  --amb-petrole-empty-to: #14222b;
+
+  /* Sauge */
+  --amb-sauge-accent: #9cb88a;
+  --amb-sauge-ground: #212619;
+  --amb-sauge-card-from: #34392a;
+  --amb-sauge-card-to: #191c14;
+  --amb-sauge-ink: #1d2216;
+  --amb-sauge-note: #e6ebda;
+  --amb-sauge-empty-from: #363b29;
+  --amb-sauge-empty-mid: #272b1e;
+  --amb-sauge-empty-to: #1d2017;
+
+  /* Bordeaux */
+  --amb-bordeaux-accent: #b4526a;
+  --amb-bordeaux-ground: #2a1720;
+  --amb-bordeaux-card-from: #432130;
+  --amb-bordeaux-card-to: #1e1219;
+  --amb-bordeaux-ink: #260f17;
+  --amb-bordeaux-note: #f0d6de;
+  --amb-bordeaux-empty-from: #3c1f2a;
+  --amb-bordeaux-empty-mid: #2a1a20;
+  --amb-bordeaux-empty-to: #1f141a;
+
   /* Typographie */
   --font-display: "Newsreader", serif;
   --font-ui: "Instrument Sans", sans-serif;
