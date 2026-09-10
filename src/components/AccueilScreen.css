@@ -224,32 +224,43 @@
   position: relative;
   z-index: 1;
   height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 18px;
+  overflow: visible;
+}
+
+/* Piste continue : jamais réordonnée, seule sa translation horizontale
+   glisse (en continu, comme une roue qu'on fait tourner) pour amener le
+   tableau visé pile au centre — voir le calcul de `focusX` au-dessus. */
+.accueil-carousel-track {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  transition: transform 140ms linear;
 }
 
 .accueil-carousel-slot {
-  flex: 0 0 auto;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%) scale(1);
   transition:
-    width 260ms var(--ease-drift, ease-out),
-    height 260ms var(--ease-drift, ease-out),
-    opacity 260ms var(--ease-drift, ease-out),
-    filter 260ms var(--ease-drift, ease-out),
-    transform 200ms var(--ease-drift, ease-out);
+    left 140ms linear,
+    width 140ms linear,
+    height 140ms linear,
+    opacity 200ms var(--ease-drift, ease-out),
+    filter 200ms var(--ease-drift, ease-out),
+    transform 160ms var(--ease-drift, ease-out);
 }
 
 /* Petit zoom au survol — la carte elle-même déclenche l'ouverture, plus
    de bouton "OUVRIR" séparé. */
 .accueil-carousel-slot:hover {
-  transform: scale(1.035);
+  transform: translateY(-50%) scale(1.035);
 }
 
 /* La carte cliquée zoome et s'efface pour laisser place au tableau ; les
    autres s'estompent en même temps, plutôt qu'un changement d'écran sec. */
 .accueil-carousel-slot.is-opening {
-  transform: scale(2.4) !important;
+  transform: translateY(-50%) scale(2.4) !important;
   filter: none !important;
   z-index: 500 !important;
   transition: transform 380ms ease-in;
