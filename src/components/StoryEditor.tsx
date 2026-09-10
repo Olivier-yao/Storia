@@ -28,6 +28,7 @@ function StoryEditor({
   onChangeStory,
   onBack,
   onPlay,
+  onCaptionSave,
 }: {
   categoryName: string;
   photos: BoardPhoto[];
@@ -35,6 +36,10 @@ function StoryEditor({
   onChangeStory: (story: Story) => void;
   onBack: () => void;
   onPlay: () => void;
+  // Permet de corriger la légende d'un polaroïd directement depuis
+  // l'aperçu de la scène — la photo appartient au tableau, pas à
+  // l'histoire, donc la modif remonte jusqu'à l'état du tableau.
+  onCaptionSave?: (id: string, text: string) => void;
 }) {
   const [activeSceneId, setActiveSceneId] = useState(story.scenes[0]?.id);
   const [photoDragOver, setPhotoDragOver] = useState(false);
@@ -183,6 +188,11 @@ function StoryEditor({
                 <div className="story-preview-frame">
                   <FrameVisual
                     photo={{ ...previewPhoto, frameType: activeScene.frameType }}
+                    onCaptionSave={
+                      onCaptionSave
+                        ? (text) => onCaptionSave(previewPhoto.id, text)
+                        : undefined
+                    }
                   />
                 </div>
               )}

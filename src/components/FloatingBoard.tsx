@@ -448,6 +448,7 @@ function FloatingBoard({
           onChangeStory={setStory}
           onBack={() => setStoryEditorOpen(false)}
           onPlay={() => setPlaying(true)}
+          onCaptionSave={handleCaptionSave}
         />
         {playing && (
           <StoryPlayback

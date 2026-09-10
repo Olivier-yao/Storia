@@ -35,7 +35,7 @@ export interface BoardPhoto {
 function PolaroidVisual({
   tint,
   caption,
-  onCaptionSave = () => {},
+  onCaptionSave,
 }: {
   tint: string;
   caption: string;
@@ -43,11 +43,14 @@ function PolaroidVisual({
 }) {
   const [editing, setEditing] = useState(false);
   const [draft, setDraft] = useState(caption);
+  // Sans `onCaptionSave` réel (aperçu d'histoire en lecture, "revivre"),
+  // le double-clic ne doit ni s'afficher ni faire semblant de marcher.
+  const editable = Boolean(onCaptionSave);
 
   function commit() {
     setEditing(false);
     const trimmed = draft.trim();
-    if (trimmed && trimmed !== caption) onCaptionSave(trimmed);
+    if (trimmed && trimmed !== caption) onCaptionSave?.(trimmed);
     else setDraft(caption);
   }
 
@@ -74,11 +77,15 @@ function PolaroidVisual({
       ) : (
         <div
           className="frame-polaroid-caption"
-          onDoubleClick={(e) => {
-            e.stopPropagation();
-            setEditing(true);
-          }}
-          title="Double-clic pour modifier"
+          onDoubleClick={
+            editable
+              ? (e) => {
+                  e.stopPropagation();
+                  setEditing(true);
+                }
+              : undefined
+          }
+          title={editable ? "Double-clic pour modifier" : undefined}
         >
           {caption}
         </div>
