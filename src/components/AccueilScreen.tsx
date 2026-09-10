@@ -58,12 +58,14 @@ const THEME_CHOICES: { id: Ambiance; label: string }[] = [
 
 function AccueilScreen({
   categories,
+  totalStories,
   onOpenCategory,
   onCreateCategory,
   resumeStory,
   onResume,
 }: {
   categories: CategoryCardData[];
+  totalStories: number;
   onOpenCategory: (boardId: string) => void;
   onCreateCategory: (name: string, ambiance: Ambiance) => void;
   resumeStory: { boardId: string; title: string; ambiance: Ambiance } | null;
@@ -262,7 +264,8 @@ function AccueilScreen({
           <span className="accueil-logo">Storia</span>
           <span className="accueil-sep">|</span>
           <span className="accueil-count">
-            {totalPhotos} souvenirs · 6 histoires
+            {totalPhotos} souvenirs · {totalStories} histoire
+            {totalStories > 1 ? "s" : ""}
           </span>
         </div>
         <nav className="accueil-nav">

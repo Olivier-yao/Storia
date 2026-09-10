@@ -36,6 +36,14 @@ function derivePreviewPhotos(boardPhotos: BoardPhoto[]): CardPhoto[] {
   }));
 }
 
+// Texte "X photos · Y histoire(s)" recalculé sur les vraies données —
+// l'ancien texte venait d'un décor figé (homeCategories.ts) qui ne
+// bougeait jamais quand on ajoutait une photo ou une histoire.
+function describeBoard(photoCount: number, hasStory: boolean): string {
+  const photoPart = `${photoCount} photo${photoCount > 1 ? "s" : ""}`;
+  return hasStory ? `${photoPart} · 1 histoire` : photoPart;
+}
+
 function App() {
   const [openBoardId, setOpenBoardId] = useState<string | null>(null);
   const [openInEditor, setOpenInEditor] = useState(false);
@@ -167,12 +175,15 @@ function App() {
   const categories = [...homeCategories, ...customCategories].map((c) => {
     const board = getBoard(c.boardId);
     if (!board) return c;
+    const hasStory = Boolean(stories[c.boardId]);
     return {
       ...c,
       photoCount: board.photos.length,
       photos: derivePreviewPhotos(board.photos),
+      meta: describeBoard(board.photos.length, hasStory),
     };
   });
+  const totalStories = Object.keys(stories).length;
 
   const resumeEntry = Object.entries(stories).sort(
     (a, b) => b[1].updatedAt - a[1].updatedAt,
@@ -192,6 +203,7 @@ function App() {
   return (
     <AccueilScreen
       categories={categories}
+      totalStories={totalStories}
       onOpenCategory={setOpenBoardId}
       onCreateCategory={createCategory}
       resumeStory={resumeStory}
