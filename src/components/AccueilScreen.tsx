@@ -8,6 +8,27 @@ import "./AccueilScreen.css";
 const MIN_ZOOM = 0.7;
 const MAX_ZOOM = 1.6;
 
+// Carrousel en profondeur ("coverflow") : la carte centrale est grande et
+// nette, les autres rétrécissent et s'estompent en s'éloignant du centre —
+// inspiré de la référence envoyée par l'utilisateur (cartes de films
+// empilées en profondeur, Pinterest).
+const CENTER_W = 320;
+const CENTER_H = 430;
+const STEP_W = 74;
+const STEP_H = 96;
+const MIN_W = 130;
+const MIN_H = 175;
+
+function slotStyle(distance: number) {
+  return {
+    width: Math.max(MIN_W, CENTER_W - distance * STEP_W),
+    height: Math.max(MIN_H, CENTER_H - distance * STEP_H),
+    opacity: Math.max(0.3, 1 - distance * 0.26),
+    filter: distance === 0 ? undefined : `blur(${Math.min(2.4, distance * 0.7)}px)`,
+    zIndex: 100 - distance,
+  };
+}
+
 const THEME_CHOICES: { id: Ambiance; label: string }[] = [
   { id: "neutre", label: "Sans thème" },
   { id: "famille", label: "Famille" },
@@ -70,8 +91,18 @@ function AccueilScreen({
   // neuf (règle de la mosaïque, 3a).
   const featuredIndex = categories.findIndex((c) => c.photoCount > 0);
   const featured = featuredIndex >= 0 ? categories[featuredIndex] : null;
-  const others = categories.filter((_, i) => i !== featuredIndex);
   const totalPhotos = categories.reduce((sum, c) => sum + c.photoCount, 0);
+
+  // Range les tableaux en rangée avec le tableau vedette (ou le premier, à
+  // défaut) au centre, les autres répartis de part et d'autre en gardant
+  // leur ordre — c'est cette rangée que le carrousel affiche en profondeur.
+  const pivot = featured ?? categories[0] ?? null;
+  const rest = categories.filter((c) => c !== pivot);
+  const half = Math.ceil(rest.length / 2);
+  const rowCards = pivot
+    ? [...rest.slice(0, half), pivot, ...rest.slice(half)]
+    : [];
+  const centerIndex = rowCards.indexOf(pivot as CategoryCardData);
 
   return (
     <div className="accueil-screen">
@@ -174,25 +205,20 @@ function AccueilScreen({
           className="accueil-mosaic-zoom"
           style={{ transform: `scale(${zoom})` }}
         >
-          {featured && (
-            <div className="accueil-featured">
-              <div className="accueil-featured-glow" />
-              <CategoryCard
-                data={featured}
-                onOpen={() => onOpenCategory(featured.boardId)}
-                featured
-              />
-            </div>
+          {pivot && (
+            <div className={`accueil-glow ambiance-${pivot.ambiance}`} />
           )}
-          <div className="accueil-others">
-            {others.map((card, i) => (
+          <div className="accueil-carousel">
+            {rowCards.map((card, i) => (
               <div
                 key={card.boardId}
-                className={`accueil-other-slot tilt-${i % 4}`}
+                className="accueil-carousel-slot"
+                style={slotStyle(Math.abs(i - centerIndex))}
               >
                 <CategoryCard
                   data={card}
                   onOpen={() => onOpenCategory(card.boardId)}
+                  featured={card === featured}
                 />
               </div>
             ))}
