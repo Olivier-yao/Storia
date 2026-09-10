@@ -59,21 +59,71 @@ function AccueilScreen({
   const [name, setName] = useState("");
   const [theme, setTheme] = useState<Ambiance>("neutre");
   const [zoom, setZoom] = useState(1);
+  // Tableau explicitement amené au centre par un clic sur une carte
+  // latérale ou un défilement horizontal — prioritaire sur le choix
+  // automatique (le plus visité).
+  const [centerBoardId, setCenterBoardId] = useState<string | null>(null);
+  // Carte en cours d'ouverture : pilote la transition de zoom vers le
+  // tableau avant de basculer vraiment d'écran.
+  const [openingId, setOpeningId] = useState<string | null>(null);
   const mosaicRef = useRef<HTMLDivElement>(null);
+  const hScrollAccum = useRef(0);
 
-  // Molette pour zoomer/dézoomer sur la mosaïque, comme sur un tableau
-  // flottant — même mécanique et mêmes bornes que la vue photo.
+  // Le tableau le plus visité anime la carte large par défaut — jamais un
+  // tableau neuf (règle de la mosaïque, 3a) — sauf si l'utilisateur a
+  // explicitement recentré le carrousel sur un autre tableau.
+  const featuredIndex = categories.findIndex((c) => c.photoCount > 0);
+  const featured = featuredIndex >= 0 ? categories[featuredIndex] : null;
+  const totalPhotos = categories.reduce((sum, c) => sum + c.photoCount, 0);
+  const pivot =
+    categories.find((c) => c.boardId === centerBoardId) ??
+    featured ??
+    categories[0] ??
+    null;
+
+  // Molette pour zoomer/dézoomer sur la mosaïque (comme sur un tableau
+  // flottant), ou pour défiler horizontalement dans le carrousel quand le
+  // geste est surtout horizontal (glissement 2 doigts sur pavé tactile) —
+  // chaque "cran" accumulé avance le tableau centré d'un cran.
   useEffect(() => {
     const node = mosaicRef.current;
     if (!node) return;
     const onWheel = (e: globalThis.WheelEvent) => {
       e.preventDefault();
+      if (Math.abs(e.deltaX) > Math.abs(e.deltaY) * 1.2) {
+        hScrollAccum.current += e.deltaX;
+        const THRESHOLD = 80;
+        if (Math.abs(hScrollAccum.current) < THRESHOLD) return;
+        const dir = hScrollAccum.current > 0 ? 1 : -1;
+        hScrollAccum.current = 0;
+        const idx = categories.findIndex((c) => c.boardId === pivot?.boardId);
+        const nextIdx = Math.min(
+          categories.length - 1,
+          Math.max(0, idx + dir),
+        );
+        const next = categories[nextIdx];
+        if (next) setCenterBoardId(next.boardId);
+        return;
+      }
       const delta = -e.deltaY * 0.0015;
       setZoom((z) => Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, z + z * delta)));
     };
     node.addEventListener("wheel", onWheel, { passive: false });
     return () => node.removeEventListener("wheel", onWheel);
-  }, []);
+  }, [categories, pivot]);
+
+  // Une carte latérale se recentre au clic (elle prend la place de
+  // l'ancienne carte centrale) ; la carte déjà centrale s'ouvre, avec une
+  // petite animation de zoom avant de basculer vers le tableau.
+  function handleCardClick(card: CategoryCardData) {
+    if (openingId) return;
+    if (card.boardId === pivot?.boardId) {
+      setOpeningId(card.boardId);
+      window.setTimeout(() => onOpenCategory(card.boardId), 380);
+    } else {
+      setCenterBoardId(card.boardId);
+    }
+  }
 
   function reset() {
     setCreating(false);
@@ -87,16 +137,11 @@ function AccueilScreen({
     reset();
   }
 
-  // Le tableau le plus visité anime la carte large — jamais un tableau
-  // neuf (règle de la mosaïque, 3a).
-  const featuredIndex = categories.findIndex((c) => c.photoCount > 0);
-  const featured = featuredIndex >= 0 ? categories[featuredIndex] : null;
-  const totalPhotos = categories.reduce((sum, c) => sum + c.photoCount, 0);
-
-  // Range les tableaux en rangée avec le tableau vedette (ou le premier, à
-  // défaut) au centre, les autres répartis de part et d'autre en gardant
-  // leur ordre — c'est cette rangée que le carrousel affiche en profondeur.
-  const pivot = featured ?? categories[0] ?? null;
+  // Range les tableaux en rangée avec le tableau pivot (centré) au milieu,
+  // les autres répartis de part et d'autre en gardant leur ordre — c'est
+  // cette rangée que le carrousel affiche en profondeur. Recalculée à
+  // chaque changement de pivot, ce qui fait naturellement "échanger" la
+  // carte cliquée avec l'ancienne carte centrale.
   const rest = categories.filter((c) => c !== pivot);
   const half = Math.ceil(rest.length / 2);
   const rowCards = pivot
@@ -105,7 +150,7 @@ function AccueilScreen({
   const centerIndex = rowCards.indexOf(pivot as CategoryCardData);
 
   return (
-    <div className="accueil-screen">
+    <div className={`accueil-screen${openingId ? " is-opening" : ""}`}>
       <header className="accueil-header">
         <div className="accueil-brand">
           <span className="accueil-logo">Storia</span>
@@ -209,19 +254,27 @@ function AccueilScreen({
             <div className={`accueil-glow ambiance-${pivot.ambiance}`} />
           )}
           <div className="accueil-carousel">
-            {rowCards.map((card, i) => (
-              <div
-                key={card.boardId}
-                className="accueil-carousel-slot"
-                style={slotStyle(Math.abs(i - centerIndex))}
-              >
-                <CategoryCard
-                  data={card}
-                  onOpen={() => onOpenCategory(card.boardId)}
-                  featured={card === featured}
-                />
-              </div>
-            ))}
+            {rowCards.map((card, i) => {
+              const slotClass =
+                card.boardId === openingId
+                  ? " is-opening"
+                  : openingId
+                    ? " is-leaving"
+                    : "";
+              return (
+                <div
+                  key={card.boardId}
+                  className={`accueil-carousel-slot${slotClass}`}
+                  style={slotStyle(Math.abs(i - centerIndex))}
+                >
+                  <CategoryCard
+                    data={card}
+                    onOpen={() => handleCardClick(card)}
+                    featured={card === featured}
+                  />
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

@@ -79,6 +79,12 @@ function CategoryCard({
   return (
     <div
       className={`category-card ambiance-${ambiance}${featured ? " is-featured" : ""}`}
+      onClick={onOpen}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") onOpen();
+      }}
     >
       {featured && (
         <span className="category-card-featured-badge">LE PLUS VISITÉ</span>
@@ -148,9 +154,6 @@ function CategoryCard({
         <div className="category-card-name">{name}</div>
         <div className="category-card-meta">
           <span>{meta}</span>
-          <button type="button" className="category-card-open" onClick={onOpen}>
-            OUVRIR →
-          </button>
         </div>
       </div>
     </div>

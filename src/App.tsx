@@ -2,7 +2,12 @@ import { useEffect, useRef, useState } from "react";
 import "./styles/tokens.css";
 import AccueilScreen from "./components/AccueilScreen";
 import FloatingBoard from "./components/FloatingBoard";
-import type { Ambiance, CategoryCardData } from "./components/CategoryCard";
+import type {
+  Ambiance,
+  CardPhoto,
+  CategoryCardData,
+} from "./components/CategoryCard";
+import type { BoardPhoto } from "./components/PhotoFrame";
 import { boards as staticBoards, type BoardData } from "./data/boardData";
 import { homeCategories } from "./data/homeCategories";
 import type { Story } from "./data/storyTypes";
@@ -12,6 +17,23 @@ const SAVE_DEBOUNCE_MS = 400;
 
 function emptyBoard(name: string): BoardData {
   return { name, photos: [], notes: [], ambientTexts: [] };
+}
+
+// Aperçu réel du contenu sur la carte d'accueil : quelques vraies photos
+// du tableau, posées sur des gabarits fixes (au lieu de l'ancien décor
+// entièrement inventé) — ainsi la carte change vraiment quand on ajoute
+// une photo.
+const PREVIEW_SLOTS: Omit<CardPhoto, "tint">[] = [
+  { top: 10, left: 12, width: 46, height: 58, rotation: -4 },
+  { top: 26, left: 40, width: 44, height: 56, rotation: 3 },
+  { top: 6, left: 56, width: 38, height: 50, rotation: -2 },
+];
+
+function derivePreviewPhotos(boardPhotos: BoardPhoto[]): CardPhoto[] {
+  return boardPhotos.slice(0, PREVIEW_SLOTS.length).map((photo, i) => ({
+    ...PREVIEW_SLOTS[i],
+    tint: photo.tint,
+  }));
 }
 
 function App() {
@@ -144,7 +166,12 @@ function App() {
 
   const categories = [...homeCategories, ...customCategories].map((c) => {
     const board = getBoard(c.boardId);
-    return board ? { ...c, photoCount: board.photos.length } : c;
+    if (!board) return c;
+    return {
+      ...c,
+      photoCount: board.photos.length,
+      photos: derivePreviewPhotos(board.photos),
+    };
   });
 
   const resumeEntry = Object.entries(stories).sort(

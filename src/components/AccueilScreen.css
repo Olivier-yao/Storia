@@ -16,6 +16,18 @@
   overflow: hidden;
 }
 
+/* Transition d'ouverture d'un tableau : l'entête et le texte d'accueil
+   s'effacent pendant que la carte cliquée zoome vers l'écran. */
+.accueil-header,
+.accueil-greeting {
+  transition: opacity 260ms ease-out;
+}
+.accueil-screen.is-opening .accueil-header,
+.accueil-screen.is-opening .accueil-greeting {
+  opacity: 0;
+  pointer-events: none;
+}
+
 .accueil-header {
   flex: 0 0 auto;
   display: flex;
@@ -224,7 +236,27 @@
     width 260ms var(--ease-drift, ease-out),
     height 260ms var(--ease-drift, ease-out),
     opacity 260ms var(--ease-drift, ease-out),
-    filter 260ms var(--ease-drift, ease-out);
+    filter 260ms var(--ease-drift, ease-out),
+    transform 200ms var(--ease-drift, ease-out);
+}
+
+/* Petit zoom au survol — la carte elle-même déclenche l'ouverture, plus
+   de bouton "OUVRIR" séparé. */
+.accueil-carousel-slot:hover {
+  transform: scale(1.035);
+}
+
+/* La carte cliquée zoome et s'efface pour laisser place au tableau ; les
+   autres s'estompent en même temps, plutôt qu'un changement d'écran sec. */
+.accueil-carousel-slot.is-opening {
+  transform: scale(2.4) !important;
+  filter: none !important;
+  z-index: 500 !important;
+  transition: transform 380ms ease-in;
+}
+.accueil-carousel-slot.is-leaving {
+  opacity: 0 !important;
+  transition: opacity 260ms ease-out;
 }
 
 .accueil-glow {

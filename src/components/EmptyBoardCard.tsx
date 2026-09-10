@@ -77,7 +77,15 @@ function EmptyBoardCard({
   onFirstPhoto: () => void;
 }) {
   return (
-    <div className={`empty-board-card ambiance-${ambiance}`}>
+    <div
+      className={`empty-board-card ambiance-${ambiance}`}
+      onClick={onFirstPhoto}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") onFirstPhoto();
+      }}
+    >
       <div className="empty-board-scene">
         <div className="empty-board-grain" />
         <div className="empty-board-halo" />
@@ -89,14 +97,7 @@ function EmptyBoardCard({
       <div className="empty-board-footer">
         <div className="empty-board-name">{name}</div>
         <div className="empty-board-meta">TABLEAU NEUF · 0 PHOTO</div>
-        <button
-          type="button"
-          className="empty-board-cta"
-          onClick={(e) => {
-            e.stopPropagation();
-            onFirstPhoto();
-          }}
-        >
+        <button type="button" className="empty-board-cta">
           ＋ Première photo
         </button>
       </div>
