@@ -10,7 +10,7 @@ import NoteSlideOut from "./NoteSlideOut";
 import BookOverlay from "./BookOverlay";
 import FloatingNote, { type FloatingNoteData } from "./FloatingNote";
 import AmbientText from "./AmbientText";
-import type { Ambiance } from "./CategoryCard";
+import { AMBIANCE_CHOICES, type Ambiance } from "./CategoryCard";
 import StoryEditor from "./StoryEditor";
 import StoryPlayback from "./StoryPlayback";
 import { emptyStory, type Story } from "../data/storyTypes";
@@ -68,6 +68,7 @@ interface FloatingBoardProps {
   onNotesChange?: (notes: FloatingNoteData[]) => void;
   onStoryChange?: (story: Story | null) => void;
   onAmbientTextsChange?: (texts: AmbientTextData[]) => void;
+  onAmbianceChange?: (ambiance: Ambiance) => void;
 }
 
 function FloatingBoard({
@@ -83,6 +84,7 @@ function FloatingBoard({
   onNotesChange,
   onStoryChange,
   onAmbientTextsChange,
+  onAmbianceChange,
 }: FloatingBoardProps) {
   const viewportRef = useRef<HTMLDivElement>(null);
   const canvasClipRef = useRef<HTMLDivElement>(null);
@@ -95,6 +97,7 @@ function FloatingBoard({
   const [editingAmbientId, setEditingAmbientId] = useState<string | null>(
     null,
   );
+  const [ambiancePickerOpen, setAmbiancePickerOpen] = useState(false);
   const [pan, setPan] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [hoveredId, setHoveredId] = useState<string | null>(null);
@@ -502,9 +505,35 @@ function FloatingBoard({
           >
             Créer une histoire
           </button>
-          <button type="button" className="board-pill">
-            Ambiance
-          </button>
+          <div className="board-ambiance-picker">
+            <button
+              type="button"
+              className="board-pill"
+              onClick={() => setAmbiancePickerOpen((v) => !v)}
+            >
+              Ambiance
+            </button>
+            {ambiancePickerOpen && (
+              <div className="board-ambiance-menu">
+                {AMBIANCE_CHOICES.map((choice) => (
+                  <button
+                    type="button"
+                    key={choice.id}
+                    className={`board-ambiance-option ambiance-${choice.id}${
+                      choice.id === ambiance ? " is-active" : ""
+                    }`}
+                    onClick={() => {
+                      onAmbianceChange?.(choice.id);
+                      setAmbiancePickerOpen(false);
+                    }}
+                  >
+                    <span className="board-ambiance-swatch" />
+                    {choice.label}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       </header>
 

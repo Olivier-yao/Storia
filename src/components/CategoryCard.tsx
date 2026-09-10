@@ -14,6 +14,22 @@ export type Ambiance =
   | "sauge"
   | "bordeaux";
 
+// Liste partagée (création d'un tableau depuis l'accueil, changement
+// d'ambiance depuis le tableau) — un seul endroit à mettre à jour si une
+// palette est ajoutée.
+export const AMBIANCE_CHOICES: { id: Ambiance; label: string }[] = [
+  { id: "neutre", label: "Sans thème" },
+  { id: "famille", label: "Famille" },
+  { id: "amoureux", label: "Amoureux" },
+  { id: "amis", label: "Amis" },
+  { id: "rencontres", label: "Belles rencontres" },
+  { id: "corail", label: "Corail" },
+  { id: "lavande", label: "Lavande" },
+  { id: "petrole", label: "Bleu pétrole" },
+  { id: "sauge", label: "Sauge" },
+  { id: "bordeaux", label: "Bordeaux" },
+];
+
 export interface CardPhoto {
   top: number;
   left: number;

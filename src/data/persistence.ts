@@ -1,6 +1,6 @@
 import { appDataDir, join } from "@tauri-apps/api/path";
 import { exists, mkdir, readTextFile, writeTextFile } from "@tauri-apps/plugin-fs";
-import type { CategoryCardData } from "../components/CategoryCard";
+import type { Ambiance, CategoryCardData } from "../components/CategoryCard";
 import type { BoardData } from "./boardData";
 import type { Story } from "./storyTypes";
 
@@ -12,6 +12,7 @@ export interface PersistedState {
   customCategories: CategoryCardData[];
   boards: Record<string, BoardData>;
   stories: Record<string, Story>;
+  ambianceOverrides?: Record<string, Ambiance>;
 }
 
 async function filePath() {

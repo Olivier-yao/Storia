@@ -54,6 +54,12 @@ function App() {
     Record<string, BoardData>
   >({});
   const [stories, setStories] = useState<Record<string, Story>>({});
+  // Ambiance choisie après coup (bouton "Ambiance" du tableau) — prioritaire
+  // sur l'ambiance de départ, qu'elle vienne d'une catégorie statique ou
+  // créée par l'utilisateur.
+  const [ambianceOverrides, setAmbianceOverrides] = useState<
+    Record<string, Ambiance>
+  >({});
   const loaded = useRef(false);
   const saveTimer = useRef<number | null>(null);
 
@@ -66,6 +72,7 @@ function App() {
         setCustomCategories(persisted.customCategories);
         setBoardOverrides(persisted.boards);
         setStories(persisted.stories);
+        setAmbianceOverrides(persisted.ambianceOverrides ?? {});
       }
       loaded.current = true;
     });
@@ -86,12 +93,13 @@ function App() {
         customCategories,
         boards: boardOverrides,
         stories,
+        ambianceOverrides,
       });
     }, SAVE_DEBOUNCE_MS);
     return () => {
       if (saveTimer.current !== null) window.clearTimeout(saveTimer.current);
     };
-  }, [customCategories, boardOverrides, stories]);
+  }, [customCategories, boardOverrides, stories, ambianceOverrides]);
 
   function getBoard(id: string): BoardData | undefined {
     return (
@@ -113,6 +121,10 @@ function App() {
       else delete next[id];
       return next;
     });
+  }
+
+  function updateAmbiance(id: string, ambiance: Ambiance) {
+    setAmbianceOverrides((prev) => ({ ...prev, [id]: ambiance }));
   }
 
   function handleResume(boardId: string) {
@@ -144,10 +156,11 @@ function App() {
       homeCategories.find((c) => c.boardId === openBoardId) ??
       customCategories.find((c) => c.boardId === openBoardId);
     if (board && category) {
+      const ambiance = ambianceOverrides[openBoardId] ?? category.ambiance;
       return (
         <FloatingBoard
           categoryName={board.name}
-          ambiance={category.ambiance}
+          ambiance={ambiance}
           photos={board.photos}
           notes={board.notes}
           story={stories[openBoardId] ?? null}
@@ -158,6 +171,7 @@ function App() {
             updateBoard(openBoardId, (b) => ({ ...b, notes }))
           }
           onStoryChange={(story) => updateStory(openBoardId, story)}
+          onAmbianceChange={(next) => updateAmbiance(openBoardId, next)}
           ambientTexts={board.ambientTexts}
           onAmbientTextsChange={(ambientTexts) =>
             updateBoard(openBoardId, (b) => ({ ...b, ambientTexts }))
@@ -173,11 +187,13 @@ function App() {
   }
 
   const categories = [...homeCategories, ...customCategories].map((c) => {
+    const ambiance = ambianceOverrides[c.boardId] ?? c.ambiance;
     const board = getBoard(c.boardId);
-    if (!board) return c;
+    if (!board) return { ...c, ambiance };
     const hasStory = Boolean(stories[c.boardId]);
     return {
       ...c,
+      ambiance,
       photoCount: board.photos.length,
       photos: derivePreviewPhotos(board.photos),
       meta: describeBoard(board.photos.length, hasStory),

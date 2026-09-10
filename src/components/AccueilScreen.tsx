@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import CategoryCard, {
+  AMBIANCE_CHOICES,
   type Ambiance,
   type CategoryCardData,
 } from "./CategoryCard";
@@ -42,19 +43,6 @@ const H_SCROLL_UNIT = 360;
 // glisse plus longtemps avant de se caler sur un tableau.
 const SETTLE_FRICTION = 0.72;
 const SETTLE_IDLE_MS = 120;
-
-const THEME_CHOICES: { id: Ambiance; label: string }[] = [
-  { id: "neutre", label: "Sans thème" },
-  { id: "famille", label: "Famille" },
-  { id: "amoureux", label: "Amoureux" },
-  { id: "amis", label: "Amis" },
-  { id: "rencontres", label: "Belles rencontres" },
-  { id: "corail", label: "Corail" },
-  { id: "lavande", label: "Lavande" },
-  { id: "petrole", label: "Bleu pétrole" },
-  { id: "sauge", label: "Sauge" },
-  { id: "bordeaux", label: "Bordeaux" },
-];
 
 function AccueilScreen({
   categories,
@@ -316,7 +304,7 @@ function AccueilScreen({
                 </button>
               </div>
               <div className="accueil-theme-row">
-                {THEME_CHOICES.map((choice) => (
+                {AMBIANCE_CHOICES.map((choice) => (
                   <button
                     type="button"
                     key={choice.id}

@@ -119,6 +119,90 @@
   background: var(--amb-accent) !important;
   color: #201812 !important;
   border: none !important;
+  cursor: pointer;
+}
+
+.board-ambiance-picker {
+  position: relative;
+}
+
+.board-ambiance-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px;
+  min-width: 190px;
+  background: #201a17;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+}
+
+.board-ambiance-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-ui);
+  font-size: 13px;
+  color: #d8cdbe;
+  background: none;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 10px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.board-ambiance-option:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.board-ambiance-option.is-active {
+  color: #f6efe4;
+  background: rgba(255, 255, 255, 0.09);
+}
+
+.board-ambiance-swatch {
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--amb-swatch);
+}
+
+.board-ambiance-option.ambiance-famille {
+  --amb-swatch: var(--amb-famille-accent);
+}
+.board-ambiance-option.ambiance-amoureux {
+  --amb-swatch: var(--amb-amoureux-accent);
+}
+.board-ambiance-option.ambiance-amis {
+  --amb-swatch: var(--amb-amis-accent);
+}
+.board-ambiance-option.ambiance-rencontres {
+  --amb-swatch: var(--amb-rencontres-accent);
+}
+.board-ambiance-option.ambiance-neutre {
+  --amb-swatch: var(--amb-neutre-accent);
+}
+.board-ambiance-option.ambiance-corail {
+  --amb-swatch: var(--amb-corail-accent);
+}
+.board-ambiance-option.ambiance-lavande {
+  --amb-swatch: var(--amb-lavande-accent);
+}
+.board-ambiance-option.ambiance-petrole {
+  --amb-swatch: var(--amb-petrole-accent);
+}
+.board-ambiance-option.ambiance-sauge {
+  --amb-swatch: var(--amb-sauge-accent);
+}
+.board-ambiance-option.ambiance-bordeaux {
+  --amb-swatch: var(--amb-bordeaux-accent);
 }
 
 .board-canvas-clip {
