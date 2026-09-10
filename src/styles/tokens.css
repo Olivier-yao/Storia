@@ -1,0 +1,79 @@
+@import url("https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400&family=Instrument+Sans:wght@400;500;600&family=Caveat:wght@400;600&family=Petit+Formal+Script&family=Patrick+Hand&family=Space+Mono&display=swap");
+
+:root {
+  /* Famille */
+  --amb-famille-accent: #e8a55c;
+  --amb-famille-ground: #2b1f19;
+  --amb-famille-card-from: #4a3324;
+  --amb-famille-card-to: #201814;
+  --amb-famille-ink: #241a12;
+  --amb-famille-note: #f3e2c9;
+  --amb-famille-empty-from: #3d332c;
+  --amb-famille-empty-mid: #2a231e;
+  --amb-famille-empty-to: #201a17;
+
+  /* Amoureux */
+  --amb-amoureux-accent: #e5849b;
+  --amb-amoureux-ground: #2e1e26;
+  --amb-amoureux-card-from: #4b2c37;
+  --amb-amoureux-card-to: #221820;
+  --amb-amoureux-ink: #2a1219;
+  --amb-amoureux-note: #f7dce3;
+  --amb-amoureux-empty-from: #3f2d34;
+  --amb-amoureux-empty-mid: #2c2028;
+  --amb-amoureux-empty-to: #221a1f;
+
+  /* Amis */
+  --amb-amis-accent: #6fd3c2;
+  --amb-amis-ground: #16302e;
+  --amb-amis-card-from: #1f4340;
+  --amb-amis-card-to: #142523;
+  --amb-amis-ink: #10201e;
+  --amb-amis-note: #bfede4;
+  --amb-amis-empty-from: #22423e;
+  --amb-amis-empty-mid: #1a302d;
+  --amb-amis-empty-to: #152423;
+
+  /* Belles rencontres */
+  --amb-rencontres-accent: #cfc3b0;
+  --amb-rencontres-ground: #29251f;
+  --amb-rencontres-card-from: #3b3630;
+  --amb-rencontres-card-to: #1f1c18;
+  --amb-rencontres-ink: #26221c;
+  --amb-rencontres-note: #e9e1d4;
+  --amb-rencontres-empty-from: #423c34;
+  --amb-rencontres-empty-mid: #2b2721;
+  --amb-rencontres-empty-to: #211e1a;
+
+  /* Neutre — catégories personnalisées sans ambiance choisie */
+  --amb-neutre-accent: #a79c8e;
+  --amb-neutre-ground: #262320;
+  --amb-neutre-card-from: #3a352f;
+  --amb-neutre-card-to: #1c1a17;
+  --amb-neutre-ink: #26231f;
+  --amb-neutre-note: #e6dfd5;
+  --amb-neutre-empty-from: #3a352f;
+  --amb-neutre-empty-mid: #2b2722;
+  --amb-neutre-empty-to: #211e1b;
+
+  /* Typographie */
+  --font-display: "Newsreader", serif;
+  --font-ui: "Instrument Sans", sans-serif;
+  --font-hand-decontractee: "Caveat", cursive;
+  --font-hand-elegante: "Petit Formal Script", cursive;
+  --font-hand-enfantine: "Patrick Hand", cursive;
+  --font-mono: "Space Mono", monospace;
+
+  /* Profondeur */
+  --depth-near-scale: 1;
+  --depth-near-blur: 0px;
+  --depth-mid-scale: 0.88;
+  --depth-mid-blur: 0.4px;
+  --depth-far-scale: 0.7;
+  --depth-far-blur: 1.4px;
+
+  /* Timing */
+  --ease-drift: cubic-bezier(0.37, 0, 0.63, 1);
+  --dur-hover: 320ms;
+  --dur-immersion: 900ms;
+}

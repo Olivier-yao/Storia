@@ -1,0 +1,142 @@
+import type { CategoryCardData } from "../components/CategoryCard";
+
+export const homeCategories: CategoryCardData[] = [
+  {
+    boardId: "famille",
+    ambiance: "famille",
+    name: "Famille",
+    meta: "42 photos · 2 histoires",
+    photoCount: 42,
+    photos: [
+      {
+        top: 15.2,
+        left: 10.5,
+        width: 40.6,
+        height: 44.7,
+        rotation: -4.2,
+        tint: "linear-gradient(135deg, #d9b48f, #9c6b45)",
+      },
+      {
+        top: 30.4,
+        left: 59.6,
+        width: 34.5,
+        height: 37.3,
+        rotation: 6,
+        tint: "linear-gradient(135deg, #e2c19a, #a67849)",
+      },
+    ],
+    sparkles: [
+      { top: 14, left: 42 },
+      { top: 46.5, left: 58.8 },
+    ],
+    notes: [
+      {
+        top: 44,
+        left: 19.4,
+        rotation: -4,
+        font: "var(--font-hand-decontractee)",
+        size: 22,
+        color: "#f3e2c9",
+        text: "le dimanche chez Mamie",
+      },
+    ],
+  },
+  {
+    boardId: "amoureux",
+    ambiance: "amoureux",
+    name: "Amoureux",
+    meta: "31 photos · 3 histoires",
+    photoCount: 31,
+    photos: [
+      {
+        top: 17.9,
+        left: 12.2,
+        width: 38.2,
+        height: 42.6,
+        rotation: 3.5,
+        tint: "linear-gradient(135deg, #d98fa8, #7c4256)",
+      },
+    ],
+    heart: { top: 39.6, left: 64.7, size: 68 },
+    notes: [
+      {
+        top: 44,
+        left: 12.2,
+        rotation: -3,
+        font: "var(--font-hand-elegante)",
+        size: 20,
+        color: "#f7dce3",
+        text: "tu as dit oui trop vite",
+      },
+    ],
+  },
+  {
+    boardId: "amis",
+    ambiance: "amis",
+    name: "Amis",
+    meta: "54 photos · 1 histoire",
+    photoCount: 54,
+    photos: [
+      {
+        top: 17.8,
+        left: 9.1,
+        width: 34.8,
+        height: 41.3,
+        rotation: -2.8,
+        tint: "linear-gradient(135deg, #3a4b46, #1b1a18)",
+      },
+    ],
+    notes: [
+      {
+        top: 26.6,
+        left: 53.8,
+        width: 39.7,
+        rotation: 5,
+        font: "var(--font-hand-enfantine)",
+        size: 17,
+        color: "#2a140c",
+        background: "#ff8a5b",
+        padding: "10px 12px",
+        text: "on a fini à 4h du mat",
+      },
+      {
+        top: 44,
+        left: 16.7,
+        rotation: -2,
+        font: "var(--font-hand-decontractee)",
+        size: 21,
+        color: "#bfede4",
+        text: "les mardis de rien",
+      },
+    ],
+  },
+  {
+    boardId: "rencontres",
+    ambiance: "rencontres",
+    name: "Belles rencontres",
+    meta: "21 photos",
+    photoCount: 21,
+    photos: [
+      {
+        top: 17.2,
+        left: 12.2,
+        width: 38.1,
+        height: 38.3,
+        rotation: 2.1,
+        tint: "linear-gradient(150deg, #6b5136, #4a381f)",
+      },
+    ],
+    notes: [
+      {
+        top: 10,
+        left: 56,
+        width: 40,
+        rotation: 0,
+        font: "var(--font-hand-elegante)",
+        size: 19,
+        color: "#e9e1d4",
+        text: "un train, deux heures, un prénom",
+      },
+    ],
+  },
+];

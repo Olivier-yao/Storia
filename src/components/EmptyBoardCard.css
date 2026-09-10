@@ -1,0 +1,263 @@
+.empty-board-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.ambiance-famille.empty-board-card {
+  background: radial-gradient(
+    120% 95% at 30% 14%,
+    var(--amb-famille-empty-from) 0%,
+    var(--amb-famille-empty-mid) 60%,
+    var(--amb-famille-empty-to) 100%
+  );
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--amb-famille-accent) 18%, transparent) inset;
+}
+.ambiance-amoureux.empty-board-card {
+  background: radial-gradient(
+    120% 95% at 30% 14%,
+    var(--amb-amoureux-empty-from) 0%,
+    var(--amb-amoureux-empty-mid) 60%,
+    var(--amb-amoureux-empty-to) 100%
+  );
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--amb-amoureux-accent) 18%, transparent) inset;
+}
+.ambiance-amis.empty-board-card {
+  background: radial-gradient(
+    120% 95% at 30% 14%,
+    var(--amb-amis-empty-from) 0%,
+    var(--amb-amis-empty-mid) 60%,
+    var(--amb-amis-empty-to) 100%
+  );
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--amb-amis-accent) 16%, transparent) inset;
+}
+.ambiance-rencontres.empty-board-card {
+  background: radial-gradient(
+    120% 95% at 30% 14%,
+    var(--amb-rencontres-empty-from) 0%,
+    var(--amb-rencontres-empty-mid) 60%,
+    var(--amb-rencontres-empty-to) 100%
+  );
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--amb-rencontres-accent) 14%, transparent) inset;
+}
+.ambiance-neutre.empty-board-card {
+  background: radial-gradient(
+    120% 95% at 30% 14%,
+    var(--amb-neutre-empty-from) 0%,
+    var(--amb-neutre-empty-mid) 60%,
+    var(--amb-neutre-empty-to) 100%
+  );
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--amb-neutre-accent) 13%, transparent) inset;
+}
+
+.empty-board-scene {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+}
+
+/* Grain de liège — un léger pointillé, jamais un aplat. */
+.empty-board-grain {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(246, 239, 228, 0.055) 1px, transparent 1px);
+  background-size: 7px 7px;
+  pointer-events: none;
+}
+
+.empty-board-halo {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.ambiance-famille .empty-board-halo {
+  background: radial-gradient(48% 42% at 60% 32%, color-mix(in srgb, var(--amb-famille-accent) 17%, transparent), transparent 72%);
+}
+.ambiance-amoureux .empty-board-halo {
+  background: radial-gradient(48% 42% at 60% 32%, color-mix(in srgb, var(--amb-amoureux-accent) 18%, transparent), transparent 72%);
+}
+.ambiance-amis .empty-board-halo {
+  background: radial-gradient(48% 42% at 60% 32%, color-mix(in srgb, var(--amb-amis-accent) 16%, transparent), transparent 72%);
+}
+.ambiance-rencontres .empty-board-halo {
+  background: radial-gradient(48% 42% at 60% 32%, color-mix(in srgb, var(--amb-rencontres-accent) 14%, transparent), transparent 72%);
+}
+.ambiance-neutre .empty-board-halo {
+  background: radial-gradient(48% 42% at 60% 32%, color-mix(in srgb, var(--amb-neutre-accent) 13%, transparent), transparent 72%);
+}
+
+/* Cadres fantômes : déjà épinglés, déjà inclinés, en pointillé. */
+.ghost-frame {
+  position: absolute;
+  border: 1px dashed rgba(246, 239, 228, 0.24);
+  border-radius: 2px;
+}
+
+.ghost-frame-polaroid {
+  top: 21%;
+  left: 24%;
+  width: 41%;
+  height: 36%;
+  transform: rotate(-4deg);
+}
+
+.ghost-frame-coeur {
+  top: 21%;
+  left: 27%;
+  width: 37%;
+  height: 33%;
+  border: none;
+  background: rgba(246, 239, 228, 0.05);
+  clip-path: path(
+    "M 48 90 C 10 61 0 39 0 25 C 0 10 12 0 25 0 C 34 0 44 6 48 14 C 52 6 62 0 71 0 C 84 0 96 10 96 25 C 96 39 86 61 48 90 Z"
+  );
+  outline: 1px dashed rgba(246, 239, 228, 0.24);
+  outline-offset: -1px;
+}
+
+.ghost-frame-pellicule {
+  top: 20%;
+  left: 26%;
+  width: 38%;
+  height: 34%;
+  transform: rotate(-2deg);
+}
+
+.ghost-perf {
+  position: absolute;
+  top: 12%;
+  bottom: 12%;
+  width: 3px;
+  border-left: 1px dashed rgba(246, 239, 228, 0.18);
+  border-right: 1px dashed rgba(246, 239, 228, 0.18);
+}
+.ghost-perf-left {
+  left: 8%;
+}
+.ghost-perf-right {
+  right: 8%;
+}
+
+.ghost-frame-bois {
+  top: 20%;
+  left: 26%;
+  width: 38%;
+  height: 34%;
+  transform: rotate(3deg);
+  padding: 8%;
+  box-sizing: border-box;
+}
+
+.ghost-frame-inset {
+  width: 100%;
+  height: 100%;
+  border: 1px dashed rgba(246, 239, 228, 0.14);
+}
+
+.ghost-frame-small {
+  top: 37%;
+  left: 55%;
+  width: 27%;
+  height: 24%;
+  transform: rotate(4deg);
+  opacity: 0.7;
+}
+
+.ghost-pin {
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 8px;
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--amb-accent, #e8a55c) 55%, transparent);
+}
+.ambiance-famille .ghost-pin {
+  --amb-accent: var(--amb-famille-accent);
+}
+.ambiance-rencontres .ghost-pin {
+  --amb-accent: var(--amb-rencontres-accent);
+}
+.ambiance-neutre .ghost-pin {
+  --amb-accent: var(--amb-neutre-accent);
+}
+
+.empty-board-note {
+  margin: 0;
+  padding: 0 24px;
+  font-size: 21px;
+  line-height: 1.25;
+  text-align: right;
+}
+.ambiance-famille .empty-board-note {
+  color: color-mix(in srgb, var(--amb-famille-note) 62%, transparent);
+}
+.ambiance-amoureux .empty-board-note {
+  color: color-mix(in srgb, var(--amb-amoureux-note) 62%, transparent);
+}
+.ambiance-amis .empty-board-note {
+  color: color-mix(in srgb, var(--amb-amis-note) 62%, transparent);
+}
+.ambiance-rencontres .empty-board-note {
+  color: color-mix(in srgb, var(--amb-rencontres-note) 60%, transparent);
+}
+.ambiance-neutre .empty-board-note {
+  color: color-mix(in srgb, var(--amb-neutre-note) 55%, transparent);
+}
+
+.empty-board-footer {
+  margin-top: auto;
+  position: relative;
+  padding: 24px 24px 26px;
+  background: linear-gradient(rgba(0, 0, 0, 0), rgba(20, 16, 14, 0.7) 55%);
+}
+
+.empty-board-name {
+  font-family: var(--font-display);
+  font-size: 28px;
+  color: #f6efe4;
+}
+
+.empty-board-meta {
+  margin-top: 6px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: #8e7e70;
+}
+
+.empty-board-cta {
+  margin-top: 12px;
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 500;
+  border: none;
+  border-radius: 999px;
+  padding: 9px 18px;
+  cursor: pointer;
+}
+.ambiance-famille .empty-board-cta {
+  background: var(--amb-famille-accent);
+  color: var(--amb-famille-ink);
+}
+.ambiance-amoureux .empty-board-cta {
+  background: var(--amb-amoureux-accent);
+  color: var(--amb-amoureux-ink);
+}
+.ambiance-amis .empty-board-cta {
+  background: var(--amb-amis-accent);
+  color: var(--amb-amis-ink);
+}
+.ambiance-rencontres .empty-board-cta {
+  background: var(--amb-rencontres-accent);
+  color: var(--amb-rencontres-ink);
+}
+.ambiance-neutre .empty-board-cta {
+  background: var(--amb-neutre-accent);
+  color: var(--amb-neutre-ink);
+}

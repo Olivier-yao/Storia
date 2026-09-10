@@ -1,0 +1,261 @@
+.photo-anchor {
+  position: absolute;
+  pointer-events: auto;
+}
+
+.photo-push {
+  transition:
+    transform var(--dur-hover) var(--ease-drift),
+    filter var(--dur-hover) var(--ease-drift);
+}
+
+.photo-depth {
+  transform-origin: top center;
+}
+
+.depth-near {
+  transform: scale(var(--depth-near-scale));
+  filter: blur(var(--depth-near-blur));
+}
+
+.depth-mid {
+  transform: scale(var(--depth-mid-scale));
+  filter: blur(var(--depth-mid-blur));
+}
+
+.depth-far {
+  transform: scale(var(--depth-far-scale));
+  filter: blur(var(--depth-far-blur));
+}
+
+/* Physique — Polaroïd : balancement, pivot à la pince. */
+.phys-drift {
+  animation: phys-drift-move var(--drift-duration) var(--ease-drift) infinite alternate;
+  animation-delay: var(--drift-delay);
+}
+
+@keyframes phys-drift-move {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(6px, 10px);
+  }
+}
+
+.phys-swing {
+  transform-origin: top center;
+  animation: phys-swing-rotate var(--swing-duration) ease-in-out infinite alternate;
+  animation-delay: var(--swing-delay);
+}
+
+@keyframes phys-swing-rotate {
+  0% {
+    transform: rotate(calc(var(--base-rotation) - 1.8deg));
+  }
+  100% {
+    transform: rotate(calc(var(--base-rotation) + 1.8deg));
+  }
+}
+
+/* Physique — Pellicule : vibration, micro-tremblement 1px. */
+.phys-vibrate {
+  animation: phys-vibrate-shake var(--vibrate-duration) linear infinite;
+  animation-delay: var(--vibrate-delay);
+}
+
+@keyframes phys-vibrate-shake {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  25% {
+    translate: 1px -1px;
+  }
+  50% {
+    translate: 0 1px;
+  }
+  75% {
+    translate: -1px 0;
+  }
+}
+
+/* Physique — Bois vintage : oscillation stable, dérive lente 16px. */
+.phys-oscillate {
+  animation: phys-oscillate-drift var(--oscillate-duration) var(--ease-drift) infinite alternate;
+  animation-delay: var(--oscillate-delay);
+}
+
+@keyframes phys-oscillate-drift {
+  0% {
+    translate: 0 0;
+  }
+  100% {
+    translate: 16px 6px;
+  }
+}
+
+/* Physique — Cœur : respiration, échelle 1.008. */
+.phys-breathe {
+  animation: phys-breathe-scale var(--breathe-duration) ease-in-out infinite alternate;
+  animation-delay: var(--breathe-delay);
+}
+
+@keyframes phys-breathe-scale {
+  0% {
+    scale: 1;
+  }
+  100% {
+    scale: 1.008;
+  }
+}
+
+/* Survol (niveau 1) — zoom 1.08 + halo d'ambiance. */
+.frame-hover {
+  transition: transform var(--dur-hover) var(--ease-drift);
+  border-radius: 4px;
+  cursor: grab;
+}
+
+.frame-hover:active {
+  cursor: grabbing;
+}
+
+.frame-hover.is-hovered {
+  transform: scale(1.08);
+  box-shadow: 0 0 60px 14px color-mix(in srgb, var(--amb-accent, #e8a55c) 45%, transparent);
+}
+
+/* Cadre — Polaroïd classique. */
+.frame-polaroid {
+  position: relative;
+  width: 220px;
+  padding: 14px 14px 44px;
+  background: #f4efe4;
+  border-radius: 2px;
+  box-shadow:
+    0 18px 32px -12px rgba(0, 0, 0, 0.55),
+    0 4px 10px -4px rgba(0, 0, 0, 0.35);
+}
+
+.frame-polaroid-clip {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 34px;
+  height: 16px;
+  border-radius: 3px;
+  background: linear-gradient(180deg, #c9a06a, #a9784a);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
+}
+
+.frame-polaroid-photo {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 1px;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+}
+
+.frame-polaroid-caption {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-family: var(--font-hand-decontractee);
+  font-size: 20px;
+  color: #3a2f22;
+  cursor: text;
+}
+
+.frame-polaroid-caption-input {
+  position: absolute;
+  bottom: 8px;
+  left: 10px;
+  right: 10px;
+  text-align: center;
+  font-family: var(--font-hand-decontractee);
+  font-size: 20px;
+  color: #3a2f22;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px dashed rgba(58, 47, 34, 0.4);
+  border-radius: 2px;
+  padding: 2px 4px;
+}
+
+/* Cadre — Pellicule argentique. */
+.frame-pellicule {
+  position: relative;
+  width: 222px;
+  padding: 13px 8px;
+  background: #1b1a18;
+  border-radius: 3px;
+  box-shadow: 0 24px 44px rgba(0, 0, 0, 0.55);
+}
+
+.frame-pellicule-holes {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 6px;
+}
+
+.frame-pellicule-holes span {
+  width: 10px;
+  height: 7px;
+  border-radius: 1px;
+  background: #0c0c0b;
+}
+
+.frame-pellicule-photo {
+  width: 100%;
+  aspect-ratio: 205 / 257;
+  margin: 8px 0;
+}
+
+.frame-pellicule-label {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 8px 8px;
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.1em;
+  color: #6c6a63;
+}
+
+/* Cadre — Bois vintage. */
+.frame-bois {
+  width: 263px;
+  aspect-ratio: 263 / 315;
+  padding: 21px;
+  box-sizing: border-box;
+  border-radius: 6px;
+  background: linear-gradient(150deg, #8a6842 0%, #5c4526 45%, #795a3a 100%);
+  box-shadow:
+    0 26px 48px rgba(0, 0, 0, 0.55),
+    inset 0 0 0 2px rgba(255, 238, 205, 0.18);
+}
+
+.frame-bois-mat {
+  width: 100%;
+  height: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  background: #efe6d5;
+}
+
+.frame-bois-photo {
+  width: 100%;
+  height: 100%;
+  box-shadow: inset 0 0 26px rgba(0, 0, 0, 0.5);
+}
+
+/* Cadre — Forme cœur (réservé aux tableaux Amoureux). */
+.frame-coeur {
+  width: 230px;
+  height: 222px;
+  clip-path: path(
+    "M 115 219 C 24 149 0 96 0 61 C 0 24 29 0 61 0 C 86 0 106 14 115 34 C 124 14 144 0 169 0 C 201 0 230 24 230 61 C 230 96 206 149 115 219 Z"
+  );
+  box-shadow: 0 0 70px rgba(240, 174, 189, 0.35);
+}

@@ -1,0 +1,199 @@
+.board-viewport {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  color: #f2ece0;
+  font-family: var(--font-ui);
+}
+
+.ambiance-famille {
+  --amb-accent: var(--amb-famille-accent);
+  --amb-ground: var(--amb-famille-ground);
+}
+.ambiance-amoureux {
+  --amb-accent: var(--amb-amoureux-accent);
+  --amb-ground: var(--amb-amoureux-ground);
+}
+.ambiance-amis {
+  --amb-accent: var(--amb-amis-accent);
+  --amb-ground: var(--amb-amis-ground);
+}
+.ambiance-rencontres {
+  --amb-accent: var(--amb-rencontres-accent);
+  --amb-ground: var(--amb-rencontres-ground);
+}
+.ambiance-neutre {
+  --amb-accent: var(--amb-neutre-accent);
+  --amb-ground: var(--amb-neutre-ground);
+}
+
+.board-viewport {
+  background: var(--amb-ground);
+}
+
+.board-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  padding: 22px 32px;
+}
+
+.board-back {
+  color: #cabfae;
+  text-decoration: none;
+  font-size: 14px;
+  font-family: var(--font-ui);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.board-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 22px;
+}
+
+.board-count {
+  color: #b8ab97;
+  font-size: 13px;
+}
+
+.board-actions {
+  margin-left: auto;
+  display: flex;
+  gap: 10px;
+}
+
+.board-file-input {
+  display: none;
+}
+
+.board-actions button {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  color: #f2ece0;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  padding: 8px 16px;
+  cursor: default;
+}
+
+.board-actions button.board-action-active {
+  cursor: pointer;
+}
+
+.board-actions button.board-action-active:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.board-pill {
+  background: var(--amb-accent) !important;
+  color: #201812 !important;
+  border: none !important;
+}
+
+.board-canvas-clip {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  cursor: grab;
+  transition:
+    filter var(--dur-immersion) var(--ease-drift),
+    transform var(--dur-immersion) var(--ease-drift);
+}
+
+.board-canvas-clip:active {
+  cursor: grabbing;
+}
+
+.board-canvas-clip.is-immersive {
+  filter: blur(6px) brightness(0.7);
+  transform: scale(0.96);
+}
+
+.board-ambient-glow {
+  position: absolute;
+  inset: -20%;
+  background: radial-gradient(
+    circle at 35% 30%,
+    color-mix(in srgb, var(--amb-accent) 18%, transparent),
+    transparent 60%
+  );
+  pointer-events: none;
+}
+
+.board-ambient-word {
+  position: absolute;
+  font-family: var(--font-hand-decontractee);
+  font-size: 22px;
+  color: #f2ece0;
+  opacity: 0.35;
+  filter: blur(0.8px);
+  pointer-events: none;
+}
+
+.word-0 {
+  top: 32%;
+  right: 8%;
+}
+
+.word-1 {
+  bottom: 22%;
+  left: 6%;
+}
+
+.board-canvas {
+  position: absolute;
+  inset: 0;
+  transform-origin: 0 0;
+  /* Le calque lui-même ne doit pas intercepter le survol : seules les
+     photos qu'il contient sont interactives, sinon un calque de premier
+     plan bloque le survol des photos des calques derrière lui (voir
+     .photo-anchor dans PhotoFrame.css qui réactive pointer-events). */
+  pointer-events: none;
+}
+
+.board-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 32px;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  color: #b8ab97;
+}
+
+.board-footer-controls {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.board-footer-controls button {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  color: #f2ece0;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  padding: 6px 14px;
+  cursor: pointer;
+}
+
+.board-footer-controls button:hover {
+  background: rgba(255, 255, 255, 0.16);
+}

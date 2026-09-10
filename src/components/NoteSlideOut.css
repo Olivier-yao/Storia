@@ -1,0 +1,35 @@
+.note-slide-out {
+  position: absolute;
+  width: 210px;
+  padding: 16px 18px;
+  background: rgba(38, 29, 24, 0.6);
+  border: 0.8px solid rgba(246, 239, 228, 0.12);
+  border-radius: 4px;
+  box-shadow: 0 22px 44px rgba(0, 0, 0, 0.4);
+  color: #f6efe4;
+  opacity: 0;
+  transform: translateX(-16px);
+  transition:
+    opacity var(--dur-hover) var(--ease-drift),
+    transform var(--dur-hover) var(--ease-drift);
+  pointer-events: none;
+}
+
+.note-slide-out.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.note-slide-out p {
+  margin: 0;
+  line-height: 1.35;
+}
+
+.note-slide-out-meta {
+  display: block;
+  margin-top: 12px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: #8e7e70;
+}

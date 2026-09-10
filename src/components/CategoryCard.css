@@ -1,0 +1,176 @@
+.category-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.category-card-featured-badge {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  z-index: 2;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+}
+.ambiance-famille .category-card-featured-badge {
+  color: var(--amb-famille-accent);
+}
+.ambiance-amoureux .category-card-featured-badge {
+  color: var(--amb-amoureux-accent);
+}
+.ambiance-amis .category-card-featured-badge {
+  color: var(--amb-amis-accent);
+}
+.ambiance-rencontres .category-card-featured-badge {
+  color: var(--amb-rencontres-accent);
+}
+.ambiance-neutre .category-card-featured-badge {
+  color: var(--amb-neutre-accent);
+}
+
+.ambiance-famille.category-card {
+  background: radial-gradient(
+    130% 100% at 30% 15%,
+    var(--amb-famille-card-from),
+    var(--amb-famille-ground) 65%,
+    var(--amb-famille-card-to)
+  );
+  border: 0.8px solid color-mix(in srgb, var(--amb-famille-accent) 22%, transparent);
+}
+.ambiance-amoureux.category-card {
+  background: radial-gradient(
+    130% 100% at 30% 15%,
+    var(--amb-amoureux-card-from),
+    var(--amb-amoureux-ground) 65%,
+    var(--amb-amoureux-card-to)
+  );
+  border: 0.8px solid color-mix(in srgb, var(--amb-amoureux-accent) 22%, transparent);
+}
+.ambiance-amis.category-card {
+  background: radial-gradient(
+    130% 100% at 30% 15%,
+    var(--amb-amis-card-from),
+    var(--amb-amis-ground) 65%,
+    var(--amb-amis-card-to)
+  );
+  border: 0.8px solid color-mix(in srgb, var(--amb-amis-accent) 22%, transparent);
+}
+.ambiance-rencontres.category-card {
+  background: radial-gradient(
+    130% 100% at 30% 15%,
+    var(--amb-rencontres-card-from),
+    var(--amb-rencontres-ground) 65%,
+    var(--amb-rencontres-card-to)
+  );
+  border: 0.8px solid color-mix(in srgb, var(--amb-rencontres-accent) 22%, transparent);
+}
+.ambiance-neutre.category-card {
+  background: radial-gradient(
+    130% 100% at 30% 15%,
+    var(--amb-neutre-card-from),
+    var(--amb-neutre-ground) 65%,
+    var(--amb-neutre-card-to)
+  );
+  border: 0.8px solid color-mix(in srgb, var(--amb-neutre-accent) 22%, transparent);
+}
+
+.category-card-scene {
+  position: absolute;
+  inset: 0;
+}
+
+.category-card-photo {
+  position: absolute;
+  box-shadow: 0 10px 24px -10px rgba(0, 0, 0, 0.55);
+}
+
+.category-card-heart {
+  position: absolute;
+  transform: rotate(-45deg);
+  background: #f0aebd;
+}
+.category-card-heart::before,
+.category-card-heart::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #f0aebd;
+}
+.category-card-heart::before {
+  top: -50%;
+  left: 0;
+}
+.category-card-heart::after {
+  top: 0;
+  left: 50%;
+}
+
+.category-card-sparkle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 99px;
+  background: #f6d9a8;
+}
+
+.category-card-note {
+  position: absolute;
+  line-height: 1.3;
+  white-space: pre-line;
+}
+
+.category-card-scrim {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 24px 24px 26px;
+  background: linear-gradient(rgba(0, 0, 0, 0), rgba(20, 16, 14, 0.88) 55%);
+}
+
+.category-card-name {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 28px;
+  color: #f6efe4;
+}
+
+.category-card-meta {
+  margin-top: 8px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  font-family: var(--font-ui);
+  font-size: 14px;
+  color: #8e7e70;
+}
+
+.category-card-open {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.ambiance-famille .category-card-open {
+  color: var(--amb-famille-accent);
+}
+.ambiance-amoureux .category-card-open {
+  color: var(--amb-amoureux-accent);
+}
+.ambiance-amis .category-card-open {
+  color: var(--amb-amis-accent);
+}
+.ambiance-rencontres .category-card-open {
+  color: var(--amb-rencontres-accent);
+}
+.ambiance-neutre .category-card-open {
+  color: var(--amb-neutre-accent);
+}

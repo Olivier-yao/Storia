@@ -1,0 +1,350 @@
+.story-editor {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--amb-ground);
+  color: #f6efe4;
+  font-family: var(--font-ui);
+}
+
+.story-editor-header {
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  padding: 20px 28px;
+  border-bottom: 1px solid rgba(246, 239, 228, 0.08);
+}
+
+.story-back {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  color: #cabfae;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.story-title {
+  font-family: var(--font-display);
+  font-size: 23px;
+}
+
+.story-meta,
+.story-draft {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #8e7e70;
+}
+
+.story-header-actions {
+  margin-left: auto;
+  display: flex;
+  gap: 10px;
+}
+
+.story-play-btn {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  color: #f6efe4;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  padding: 9px 18px;
+  cursor: pointer;
+}
+
+.story-finish-btn {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 500;
+  color: #241a12;
+  background: var(--amb-accent);
+  border: none;
+  border-radius: 999px;
+  padding: 9px 20px;
+  cursor: pointer;
+}
+
+.story-editor-body {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 220px 1fr 260px;
+  gap: 24px;
+  padding: 24px 28px;
+  overflow: hidden;
+  min-height: 0;
+}
+
+.story-panel-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  color: #8e7e70;
+  text-transform: uppercase;
+}
+
+.story-panel-hint {
+  margin: 6px 0 0;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #8e7e70;
+}
+
+.story-panel-note {
+  margin: 8px 0 0;
+  font-size: 12px;
+  color: #6f6157;
+  line-height: 1.4;
+}
+
+.story-photos-panel {
+  overflow-y: auto;
+}
+
+.story-photo-grid {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.story-photo-thumb {
+  aspect-ratio: 1;
+  border-radius: 4px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  padding: 0;
+}
+
+.story-photo-thumb.is-selected {
+  border-color: var(--amb-accent);
+}
+
+.story-preview-panel {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.story-preview {
+  position: relative;
+  flex: 1;
+  margin-top: 14px;
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  overflow: auto;
+}
+
+.story-preview-vintage {
+  background: radial-gradient(120% 100% at 50% 0%, #2c2320, #1d1715 70%);
+}
+
+.story-preview-neon {
+  background: linear-gradient(135deg, #0d1420 0%, #101a28 60%, #0b1119 100%);
+}
+
+.story-preview-badge {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: rgba(246, 239, 228, 0.35);
+}
+
+.story-preview-frame {
+  transform: scale(0.85);
+}
+
+.story-preview-title {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: 26px;
+  color: #f6efe4;
+  background: none;
+  border: none;
+  text-align: center;
+  width: 100%;
+}
+
+.story-preview-title:focus {
+  outline: 1px dashed rgba(246, 239, 228, 0.3);
+}
+
+.story-preview-text {
+  width: 100%;
+  max-width: 420px;
+  font-family: var(--font-ui);
+  font-size: 14px;
+  color: #d9cfc2;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px dashed rgba(246, 239, 228, 0.2);
+  border-radius: 4px;
+  padding: 10px;
+  resize: vertical;
+  min-height: 60px;
+}
+
+.story-editable-hint {
+  text-align: center;
+}
+
+.story-controls-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow-y: auto;
+}
+
+.story-chip-row {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.story-chip {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  color: #cabfae;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  padding: 7px 14px;
+  cursor: pointer;
+}
+
+.story-chip.is-active {
+  background: var(--amb-accent);
+  color: #241a12;
+  font-weight: 500;
+  border-color: transparent;
+}
+
+.story-duration-row {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.story-duration-value {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--amb-accent);
+  min-width: 34px;
+}
+
+.story-music-import {
+  margin-top: 10px;
+  font-family: var(--font-ui);
+  font-size: 12px;
+  color: var(--amb-accent);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.story-music-list {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.story-music-item {
+  text-align: left;
+  font-family: var(--font-ui);
+  font-size: 13px;
+  color: #f6efe4;
+  background: none;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 8px;
+  cursor: pointer;
+}
+
+.story-music-item.is-active {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--amb-accent);
+}
+
+.story-sequence {
+  border-top: 1px solid rgba(246, 239, 228, 0.08);
+  padding: 18px 28px 24px;
+}
+
+.story-sequence-row {
+  margin-top: 14px;
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+}
+
+.story-scene-card {
+  position: relative;
+  flex: 0 0 160px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 12px;
+  cursor: grab;
+}
+
+.story-scene-card.is-active {
+  border-color: var(--amb-accent);
+}
+
+.story-scene-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: #8e7e70;
+}
+
+.story-scene-duration {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--amb-accent);
+}
+
+.story-scene-title {
+  font-family: var(--font-display);
+  font-size: 16px;
+}
+
+.story-scene-meta {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  color: #6f6157;
+}
+
+.story-scene-transition {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: #6f6157;
+}
+
+.story-add-scene {
+  flex: 0 0 160px;
+  font-family: var(--font-ui);
+  font-size: 13px;
+  color: #cabfae;
+  background: none;
+  border: 1px dashed rgba(246, 239, 228, 0.24);
+  border-radius: 8px;
+  cursor: pointer;
+}

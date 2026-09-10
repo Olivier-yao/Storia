@@ -1,0 +1,286 @@
+.accueil-screen {
+  height: 100vh;
+  box-sizing: border-box;
+  padding: 32px 56px 32px;
+  background: radial-gradient(
+    120% 90% at 50% -10%,
+    #2c2320,
+    #1d1715 60%,
+    #171311 100%
+  );
+  color: #f6efe4;
+  font-family: var(--font-ui);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.accueil-header {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(246, 239, 228, 0.08);
+}
+
+.accueil-brand {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+}
+
+.accueil-logo {
+  font-family: var(--font-display);
+  font-size: 26px;
+  letter-spacing: 0.02em;
+}
+
+.accueil-sep {
+  color: rgba(246, 239, 228, 0.2);
+}
+
+.accueil-count {
+  font-size: 14px;
+  color: #8e7e70;
+}
+
+.accueil-nav {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.accueil-nav a {
+  font-size: 14px;
+  color: #c9b8a6;
+  text-decoration: none;
+}
+
+.accueil-search {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  color: #f6efe4;
+  background: rgba(255, 255, 255, 0.05);
+  border: 0.8px solid rgba(246, 239, 228, 0.14);
+  border-radius: 999px;
+  padding: 8px 16px;
+  width: 220px;
+}
+
+.accueil-search::placeholder {
+  color: #6f6157;
+}
+
+.accueil-search:focus {
+  outline: none;
+  border-color: rgba(246, 239, 228, 0.3);
+}
+
+.accueil-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--amb-rencontres-accent);
+  color: #241c17;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.accueil-greeting {
+  flex: 0 0 auto;
+  padding: 24px 0 20px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.accueil-greeting h1 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: 44px;
+}
+
+.accueil-greeting p {
+  margin: 12px 0 0;
+  font-size: 17px;
+  color: #8e7e70;
+}
+
+.accueil-actions-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.accueil-new-board {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  color: #f6efe4;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  padding: 12px 22px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.accueil-resume {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--amb-ink, #241a12);
+  background: var(--amb-accent);
+  border: none;
+  border-radius: 999px;
+  padding: 12px 22px;
+  cursor: pointer;
+  white-space: nowrap;
+  max-width: 320px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.accueil-resume.ambiance-famille {
+  --amb-accent: var(--amb-famille-accent);
+  --amb-ink: var(--amb-famille-ink, #241a12);
+}
+.accueil-resume.ambiance-amoureux {
+  --amb-accent: var(--amb-amoureux-accent);
+  --amb-ink: var(--amb-amoureux-ink, #241a12);
+}
+.accueil-resume.ambiance-amis {
+  --amb-accent: var(--amb-amis-accent);
+  --amb-ink: var(--amb-amis-ink, #241a12);
+}
+.accueil-resume.ambiance-rencontres {
+  --amb-accent: var(--amb-rencontres-accent);
+  --amb-ink: var(--amb-rencontres-ink, #241a12);
+}
+.accueil-resume.ambiance-neutre {
+  --amb-accent: var(--amb-neutre-accent);
+  --amb-ink: var(--amb-neutre-ink, #241a12);
+}
+
+.accueil-mosaic {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  gap: 24px;
+  align-items: stretch;
+}
+
+.accueil-featured {
+  flex: 0 0 40%;
+  min-height: 0;
+}
+
+.accueil-others {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  min-width: 0;
+  min-height: 0;
+}
+
+.accueil-create-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.accueil-create-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.accueil-create-row input {
+  font-family: var(--font-ui);
+  font-size: 14px;
+  color: #f6efe4;
+  background: rgba(255, 255, 255, 0.06);
+  border: 0.8px solid rgba(246, 239, 228, 0.24);
+  border-radius: 999px;
+  padding: 13px 20px;
+  min-width: 220px;
+}
+
+.accueil-create-row input:focus {
+  outline: none;
+  border-color: var(--amb-neutre-accent);
+}
+
+.accueil-create-row button {
+  font-family: var(--font-ui);
+  font-size: 14px;
+  border-radius: 999px;
+  padding: 13px 20px;
+  cursor: pointer;
+  border: none;
+  background: var(--amb-neutre-accent);
+  color: #241c17;
+}
+
+.accueil-create-row button.accueil-create-cancel {
+  background: none;
+  color: #8e7e70;
+  border: 0.8px solid rgba(246, 239, 228, 0.16);
+}
+
+.accueil-theme-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.accueil-theme-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-ui);
+  font-size: 13px;
+  color: #cabfae;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  padding: 7px 14px 7px 8px;
+  cursor: pointer;
+}
+
+.accueil-theme-chip.is-active {
+  border-color: var(--amb-accent, currentColor);
+  color: #f6efe4;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.accueil-theme-swatch {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--amb-accent);
+}
+
+.accueil-theme-chip.ambiance-famille {
+  --amb-accent: var(--amb-famille-accent);
+}
+.accueil-theme-chip.ambiance-amoureux {
+  --amb-accent: var(--amb-amoureux-accent);
+}
+.accueil-theme-chip.ambiance-amis {
+  --amb-accent: var(--amb-amis-accent);
+}
+.accueil-theme-chip.ambiance-rencontres {
+  --amb-accent: var(--amb-rencontres-accent);
+}
+.accueil-theme-chip.ambiance-neutre {
+  --amb-accent: var(--amb-neutre-accent);
+}

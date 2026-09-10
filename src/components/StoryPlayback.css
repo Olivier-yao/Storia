@@ -1,0 +1,140 @@
+.story-playback {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  cursor: default;
+  animation: story-playback-in var(--dur-immersion) var(--ease-drift);
+}
+
+@keyframes story-playback-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.story-theme-vintage {
+  background: radial-gradient(120% 100% at 50% 0%, #2c2320, #1d1715 70%);
+}
+
+.story-theme-neon {
+  background: linear-gradient(135deg, #0d1420 0%, #101a28 60%, #0b1119 100%);
+}
+
+.story-playback-stage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 40px;
+  text-align: center;
+}
+
+.story-playback-frame {
+  transform: scale(1.1);
+}
+
+.story-playback-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: 32px;
+  color: #f6efe4;
+}
+
+.story-theme-neon .story-playback-title {
+  font-family: var(--font-mono);
+  font-size: 26px;
+  color: #f0fbf8;
+  text-shadow: 0 0 18px rgba(111, 211, 194, 0.55);
+}
+
+.story-playback-text {
+  max-width: 520px;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 1.6;
+  color: #d9cfc2;
+}
+
+.story-theme-neon .story-playback-text {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  color: #cfe8e2;
+}
+
+.story-playback-progress {
+  display: flex;
+  gap: 4px;
+  padding: 0 24px;
+}
+
+.story-progress-seg {
+  flex: 1;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.story-progress-fill {
+  height: 100%;
+  background: #f6efe4;
+}
+
+.story-playback-chrome {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 24px 24px;
+  opacity: 1;
+  transition: opacity 400ms ease;
+}
+
+.story-playback-chrome.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.story-playback-scene-count,
+.story-playback-music {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: #8e7e70;
+}
+
+.story-playback-subtitle {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  color: #cabfae;
+}
+
+.story-playback-pause {
+  margin-left: auto;
+  font-size: 14px;
+  color: #f6efe4;
+  background: rgba(255, 255, 255, 0.08);
+  border: none;
+  border-radius: 999px;
+  width: 34px;
+  height: 34px;
+  cursor: pointer;
+}
+
+.story-playback-quit {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  color: #f6efe4;
+  background: rgba(255, 255, 255, 0.08);
+  border: none;
+  border-radius: 999px;
+  padding: 8px 16px;
+  cursor: pointer;
+}
