@@ -24,10 +24,32 @@ function StoryPlayback({
   const [paused, setPaused] = useState(false);
   const [chromeVisible, setChromeVisible] = useState(true);
   const chromeTimer = useRef<number | null>(null);
+  const audioRef = useRef<HTMLAudioElement>(null);
 
   const scene = story.scenes[sceneIndex];
   const photo = photos.find((p) => p.id === scene?.photoIds[0]);
   const charCount = Math.floor((elapsedMs / 1000) * CHARS_PER_SECOND);
+  // Absent pour les pistes de la bibliothèque (pas de son réel) — seul un
+  // fichier importé fournit une URL jouable.
+  const musicUrl = scene?.musicUrl ?? story.musicUrl;
+
+  // Ne joue que si la scène (ou l'histoire) a une piste réellement
+  // importée ; change de source uniquement quand la piste change, pour ne
+  // pas relancer le morceau à chaque changement de scène qui la partage.
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    if (!musicUrl) {
+      audio.pause();
+      return;
+    }
+    if (audio.src !== musicUrl) {
+      audio.src = musicUrl;
+      audio.currentTime = 0;
+    }
+    if (paused) audio.pause();
+    else audio.play().catch(() => {});
+  }, [musicUrl, paused]);
 
   useEffect(() => {
     if (paused || !scene) return;
@@ -88,6 +110,7 @@ function StoryPlayback({
       className={`story-playback story-theme-${scene.bookTheme}`}
       onMouseMove={resetChromeTimer}
     >
+      <audio ref={audioRef} loop />
       <div className="story-playback-stage">
         {photo && (
           <div className="story-playback-frame">
@@ -131,7 +154,8 @@ function StoryPlayback({
           {paused ? "▶" : "❙❙"}
         </button>
         <span className="story-playback-music">
-          ♪ {(scene.musicTrack ?? story.musicTrack).toUpperCase()} ·{" "}
+          {musicUrl ? "♪" : "♪ (muet)"}{" "}
+          {(scene.musicTrack ?? story.musicTrack).toUpperCase()} ·{" "}
           {transitionLabel?.toUpperCase()}
         </span>
         <button type="button" className="story-playback-quit" onClick={onQuit}>

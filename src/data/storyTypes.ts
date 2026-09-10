@@ -27,6 +27,10 @@ export interface Scene {
   // Remplace la musique de l'histoire pour cette seule scène ; absent =
   // utilise `Story.musicTrack`.
   musicTrack?: string;
+  // URL jouable (objet Blob) si `musicTrack` vient d'un fichier importé —
+  // absent pour les pistes de la bibliothèque, qui n'ont pas de son réel.
+  // Ne survit pas à un redémarrage de l'application (URL de session).
+  musicUrl?: string;
 }
 
 export interface Story {
@@ -34,6 +38,7 @@ export interface Story {
   title: string;
   scenes: Scene[];
   musicTrack: string;
+  musicUrl?: string;
   // Sert à retrouver l'histoire la plus récente pour "Reprendre" à l'accueil.
   updatedAt: number;
 }

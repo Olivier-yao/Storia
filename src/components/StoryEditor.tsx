@@ -90,7 +90,13 @@ function StoryEditor({
   function handleMusicFile(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     e.target.value = "";
-    if (file) onChangeStory({ ...story, musicTrack: file.name });
+    if (!file) return;
+    if (story.musicUrl) URL.revokeObjectURL(story.musicUrl);
+    onChangeStory({
+      ...story,
+      musicTrack: file.name,
+      musicUrl: URL.createObjectURL(file),
+    });
   }
 
   const previewPhoto = activeScene
@@ -290,7 +296,10 @@ function StoryEditor({
                   className={`story-music-item${
                     story.musicTrack === track ? " is-active" : ""
                   }`}
-                  onClick={() => onChangeStory({ ...story, musicTrack: track })}
+                  onClick={() => {
+                    if (story.musicUrl) URL.revokeObjectURL(story.musicUrl);
+                    onChangeStory({ ...story, musicTrack: track, musicUrl: undefined });
+                  }}
                 >
                   ▶ {track}
                 </button>
@@ -298,6 +307,9 @@ function StoryEditor({
             </div>
             <p className="story-panel-note">
               Appliquée à toute l'histoire. Une scène peut la remplacer.
+              {!story.musicUrl && story.musicTrack && (
+                <> Pistes de la bibliothèque : sans son réel, pour l'instant — importez un fichier pour une vraie lecture.</>
+              )}
             </p>
 
             {activeScene && (
@@ -312,7 +324,10 @@ function StoryEditor({
                       !activeScene.musicTrack ? " is-active" : ""
                     }`}
                     onClick={() =>
-                      updateScene(activeScene.id, { musicTrack: undefined })
+                      updateScene(activeScene.id, {
+                        musicTrack: undefined,
+                        musicUrl: undefined,
+                      })
                     }
                   >
                     Par défaut
@@ -324,7 +339,12 @@ function StoryEditor({
                       className={`story-chip${
                         activeScene.musicTrack === track ? " is-active" : ""
                       }`}
-                      onClick={() => updateScene(activeScene.id, { musicTrack: track })}
+                      onClick={() =>
+                        updateScene(activeScene.id, {
+                          musicTrack: track,
+                          musicUrl: undefined,
+                        })
+                      }
                     >
                       {track}
                     </button>
