@@ -5,6 +5,7 @@
   border-radius: 20px;
   overflow: hidden;
   cursor: pointer;
+  box-shadow: 0 28px 60px rgba(0, 0, 0, 0.45);
 }
 
 .category-card-featured-badge {
@@ -54,7 +55,7 @@
     var(--amb-famille-ground) 65%,
     var(--amb-famille-card-to)
   );
-  border: 0.8px solid color-mix(in srgb, var(--amb-famille-accent) 22%, transparent);
+  border: 1px solid color-mix(in srgb, var(--amb-famille-accent) 22%, transparent);
 }
 .ambiance-amoureux.category-card {
   background: radial-gradient(
@@ -63,7 +64,7 @@
     var(--amb-amoureux-ground) 65%,
     var(--amb-amoureux-card-to)
   );
-  border: 0.8px solid color-mix(in srgb, var(--amb-amoureux-accent) 22%, transparent);
+  border: 1px solid color-mix(in srgb, var(--amb-amoureux-accent) 22%, transparent);
 }
 .ambiance-amis.category-card {
   background: radial-gradient(
@@ -72,7 +73,7 @@
     var(--amb-amis-ground) 65%,
     var(--amb-amis-card-to)
   );
-  border: 0.8px solid color-mix(in srgb, var(--amb-amis-accent) 22%, transparent);
+  border: 1px solid color-mix(in srgb, var(--amb-amis-accent) 22%, transparent);
 }
 .ambiance-rencontres.category-card {
   background: radial-gradient(
@@ -81,7 +82,7 @@
     var(--amb-rencontres-ground) 65%,
     var(--amb-rencontres-card-to)
   );
-  border: 0.8px solid color-mix(in srgb, var(--amb-rencontres-accent) 22%, transparent);
+  border: 1px solid color-mix(in srgb, var(--amb-rencontres-accent) 22%, transparent);
 }
 .ambiance-neutre.category-card {
   background: radial-gradient(
@@ -90,7 +91,7 @@
     var(--amb-neutre-ground) 65%,
     var(--amb-neutre-card-to)
   );
-  border: 0.8px solid color-mix(in srgb, var(--amb-neutre-accent) 22%, transparent);
+  border: 1px solid color-mix(in srgb, var(--amb-neutre-accent) 22%, transparent);
 }
 .ambiance-corail.category-card {
   background: radial-gradient(
@@ -99,7 +100,7 @@
     var(--amb-corail-ground) 65%,
     var(--amb-corail-card-to)
   );
-  border: 0.8px solid color-mix(in srgb, var(--amb-corail-accent) 22%, transparent);
+  border: 1px solid color-mix(in srgb, var(--amb-corail-accent) 22%, transparent);
 }
 .ambiance-lavande.category-card {
   background: radial-gradient(
@@ -108,7 +109,7 @@
     var(--amb-lavande-ground) 65%,
     var(--amb-lavande-card-to)
   );
-  border: 0.8px solid color-mix(in srgb, var(--amb-lavande-accent) 22%, transparent);
+  border: 1px solid color-mix(in srgb, var(--amb-lavande-accent) 22%, transparent);
 }
 .ambiance-petrole.category-card {
   background: radial-gradient(
@@ -117,7 +118,7 @@
     var(--amb-petrole-ground) 65%,
     var(--amb-petrole-card-to)
   );
-  border: 0.8px solid color-mix(in srgb, var(--amb-petrole-accent) 22%, transparent);
+  border: 1px solid color-mix(in srgb, var(--amb-petrole-accent) 22%, transparent);
 }
 .ambiance-sauge.category-card {
   background: radial-gradient(
@@ -126,7 +127,7 @@
     var(--amb-sauge-ground) 65%,
     var(--amb-sauge-card-to)
   );
-  border: 0.8px solid color-mix(in srgb, var(--amb-sauge-accent) 22%, transparent);
+  border: 1px solid color-mix(in srgb, var(--amb-sauge-accent) 22%, transparent);
 }
 .ambiance-bordeaux.category-card {
   background: radial-gradient(
@@ -135,7 +136,7 @@
     var(--amb-bordeaux-ground) 65%,
     var(--amb-bordeaux-card-to)
   );
-  border: 0.8px solid color-mix(in srgb, var(--amb-bordeaux-accent) 22%, transparent);
+  border: 1px solid color-mix(in srgb, var(--amb-bordeaux-accent) 22%, transparent);
 }
 
 .category-card-scene {
@@ -191,7 +192,19 @@
   right: 0;
   bottom: 0;
   padding: 24px 24px 26px;
-  background: linear-gradient(rgba(0, 0, 0, 0), rgba(20, 16, 14, 0.88) 55%);
+  background: linear-gradient(transparent, var(--scrim-color, rgba(20, 16, 14, 0.88)) 55%);
+}
+.ambiance-famille .category-card-scrim {
+  --scrim-color: rgba(24, 18, 15, 0.88);
+}
+.ambiance-amoureux .category-card-scrim {
+  --scrim-color: rgba(26, 17, 21, 0.88);
+}
+.ambiance-amis .category-card-scrim {
+  --scrim-color: rgba(15, 26, 25, 0.88);
+}
+.ambiance-rencontres .category-card-scrim {
+  --scrim-color: rgba(22, 20, 17, 0.88);
 }
 
 .category-card-name {
@@ -207,8 +220,8 @@
   align-items: baseline;
   justify-content: space-between;
   font-family: var(--font-ui);
-  font-size: 14px;
-  color: #8e7e70;
+  font-size: 13px;
+  color: #c9b8a6;
 }
 
 /* Pur repère visuel (planche 1b) — toute la carte ouvre déjà le tableau

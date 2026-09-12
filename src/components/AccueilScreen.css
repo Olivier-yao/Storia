@@ -30,17 +30,18 @@
 
 .accueil-header {
   flex: 0 0 auto;
+  height: 74px;
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-bottom: 20px;
   border-bottom: 1px solid rgba(246, 239, 228, 0.07);
 }
 
 .accueil-brand {
   display: flex;
-  align-items: baseline;
-  gap: 16px;
+  align-items: center;
+  gap: 14px;
 }
 
 .accueil-logo {
@@ -50,7 +51,9 @@
 }
 
 .accueil-sep {
-  color: rgba(246, 239, 228, 0.2);
+  width: 1px;
+  height: 20px;
+  background: rgba(246, 239, 228, 0.14);
 }
 
 .accueil-count {
@@ -81,11 +84,10 @@
 
 .accueil-greeting {
   flex: 0 0 auto;
-  padding: 24px 0 20px;
+  padding: 38px 0 34px;
   display: flex;
-  align-items: baseline;
-  gap: 24px;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .accueil-greeting h1 {
@@ -96,12 +98,13 @@
 }
 
 .accueil-greeting p {
-  margin: 0;
+  margin: 6px 0 0;
   font-size: 17px;
   color: #8e7e70;
 }
 
 .accueil-resume {
+  margin-top: 18px;
   font-family: var(--font-ui);
   font-size: 13px;
   font-weight: 500;

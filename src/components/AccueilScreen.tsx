@@ -75,7 +75,7 @@ function AccueilScreen({
       <header className="accueil-header">
         <div className="accueil-brand">
           <span className="accueil-logo">Storia</span>
-          <span className="accueil-sep">|</span>
+          <span className="accueil-sep" />
           <span className="accueil-count">
             {totalPhotos} souvenirs · {totalStories} histoire
             {totalStories > 1 ? "s" : ""}
@@ -105,6 +105,7 @@ function AccueilScreen({
           </button>
         )}
       </div>
+
 
       <div className="accueil-grid-wrap" ref={gridRef}>
         <div
