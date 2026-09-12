@@ -20,8 +20,8 @@
   width: 220px;
   padding: 14px 16px 16px;
   box-sizing: border-box;
-  background: rgba(38, 29, 24, 0.62);
-  border: 0.8px solid rgba(246, 239, 228, 0.12);
+  background: rgba(38, 29, 24, 0.6);
+  border: 1px solid rgba(246, 239, 228, 0.12);
   border-radius: 4px;
   box-shadow: 0 22px 44px rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(10px);
