@@ -170,6 +170,7 @@ function CategoryCard({
         <div className="category-card-name">{name}</div>
         <div className="category-card-meta">
           <span>{meta}</span>
+          <span className="category-card-open">OUVRIR →</span>
         </div>
       </div>
     </div>

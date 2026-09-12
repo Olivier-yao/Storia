@@ -195,7 +195,13 @@ function App() {
       ...c,
       ambiance,
       photoCount: board.photos.length,
-      photos: derivePreviewPhotos(board.photos),
+      // Les 4 tableaux d'origine ont leur propre décor posé à la main
+      // (planche 1b) — n'y toucher que pour un tableau perso, qui n'en a
+      // pas, afin qu'il montre quand même un aperçu de son vrai contenu.
+      photos:
+        c.photos.length === 0
+          ? derivePreviewPhotos(board.photos)
+          : c.photos,
       meta: describeBoard(board.photos.length, hasStory),
     };
   });

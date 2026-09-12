@@ -211,3 +211,41 @@
   color: #8e7e70;
 }
 
+/* Pur repère visuel (planche 1b) — toute la carte ouvre déjà le tableau
+   au clic, ce n'est pas un contrôle séparé. */
+.category-card-open {
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.ambiance-famille .category-card-open {
+  color: var(--amb-famille-accent);
+}
+.ambiance-amoureux .category-card-open {
+  color: var(--amb-amoureux-accent);
+}
+.ambiance-amis .category-card-open {
+  color: var(--amb-amis-accent);
+}
+.ambiance-rencontres .category-card-open {
+  color: var(--amb-rencontres-accent);
+}
+.ambiance-neutre .category-card-open {
+  color: var(--amb-neutre-accent);
+}
+.ambiance-corail .category-card-open {
+  color: var(--amb-corail-accent);
+}
+.ambiance-lavande .category-card-open {
+  color: var(--amb-lavande-accent);
+}
+.ambiance-petrole .category-card-open {
+  color: var(--amb-petrole-accent);
+}
+.ambiance-sauge .category-card-open {
+  color: var(--amb-sauge-accent);
+}
+.ambiance-bordeaux .category-card-open {
+  color: var(--amb-bordeaux-accent);
+}
+
